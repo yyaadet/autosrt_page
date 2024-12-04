@@ -12,10 +12,10 @@ AutoSRT App Home Page. AutoSRT is an application that automatically generates En
 
 ## Screenshots
 
-![Home](https://raw.githubusercontent.com/yyaadet/AutoSRT/main/screenshots/home.png)
+![Home](https://github.com/yyaadet/autosrt_page/blob/main/screenshots/home.png)
 
 
-![Processing](https://raw.githubusercontent.com/yyaadet/AutoSRT/main/screenshots/processing.png)
+![Processing](https://github.com/yyaadet/autosrt_page/blob/main/screenshots/processing.png)
 
 
 ## Installation

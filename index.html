@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoSRT - Automatic Subtitle Generation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: #121212;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            margin: -2rem -2rem 2rem -2rem;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .upload-section {
+            background: #1e1e1e;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .upload-zone {
+            border: 3px dashed #333;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-zone:hover {
+            border-color: #6c5ce7;
+            background: #252525;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: #1e1e1e;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #6c5ce7;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #6c5ce7;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: #5b4cc4;
+            transform: scale(1.05);
+        }
+
+        .supported-formats {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .format-badge {
+            background: #2a2a2a;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: #888;
+        }
+
+        .thanks {
+            text-align: center;
+            margin: 3rem 0;
+            color: #888;
+        }
+
+        .thanks a {
+            color: #6c5ce7;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .thanks a:hover {
+            color: #8f7ff8;
+        }
+
+        .screenshots {
+            margin: 4rem 0;
+        }
+
+        .screenshots h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .screenshot-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #1e1e1e;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            aspect-ratio: 16 / 9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .screenshot-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border-radius: 8px;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        .screenshot-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating-icon {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">AutoSRT</div>
+            <p class="subtitle">Transform your videos with automatic subtitle generation powered by advanced AI</p>
+            <a href="#" class="cta-button">Start Converting Now</a>
+        </header>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>High Accuracy</h3>
+                <p>Advanced AI models ensure precise speech recognition and timing alignment.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌍</div>
+                <h3>Multi-language Support</h3>
+                <p>Generate subtitles in multiple languages (English and Chinese) with automatic translation.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Fast Processing</h3>
+                <p>Get your subtitles in minutes, not hours. Real-time processing available.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📝</div>
+                <h3>Multiple Formats</h3>
+                <p>Export subtitles in SRT formats.</p>
+            </div>
+        </div>
+
+        <section class="screenshots">
+            <h2>See AutoSRT in Action</h2>
+            <div class="screenshot-grid">
+                <div class="screenshot-item">
+                    <img src="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/home.png" alt="Home Interface">
+                    <div class="screenshot-caption">Home Interface - Upload your video</div>
+                </div>
+                <div class="screenshot-item">
+                    <img src="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/processing.png" alt="Processing Screen">
+                    <div class="screenshot-caption">Processing - Real-time transcription</div>
+                </div>
+                <div class="screenshot-item">
+                    <img src="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/done.png" alt="Completion Screen">
+                    <div class="screenshot-caption">Done - Ready to download</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="thanks">
+            <p>Special thanks to <a href="https://www.51zhi.com/" target="_blank" rel="noopener noreferrer">Slot Finder</a> for their support.</p>
+        </section>
+
+        <footer>
+            <p> 2024 AutoSRT. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

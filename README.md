@@ -14,18 +14,18 @@ AutoSRT App Home Page. AutoSRT is an application that automatically generates En
 
 ![Home](https://github.com/yyaadet/autosrt_page/blob/main/screenshots/home.png)
 
-
 ![Processing](https://github.com/yyaadet/autosrt_page/blob/main/screenshots/processing.png)
+
+![Done](https://github.com/yyaadet/autosrt_page/blob/main/screenshots/done.png)
 
 
 ## Installation
 
 MacOS M1 or later is required.
 
-1. Install Ollama [https://github.com/acheong08/ollama](https://github.com/acheong08/ollama).
+1. Install Ollama [https://ollama.com/](https://ollama.com/).
 2. Download [AutoSRT](https://github.com/yyaadet/AutoSRT/releases).
 
 ## Thanks
 
 - [Slot Finder](https://www.51zhi.com/)
-- [https://github.com/acheong08/ollama](https://github.com/acheong08/ollama)

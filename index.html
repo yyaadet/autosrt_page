@@ -325,6 +325,58 @@
             font-weight: 600;
         }
 
+        .donation-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 30px rgba(0, 255, 170, 0.1);
+        }
+
+        .donation-title {
+            color: #00ffaa;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .donation-subtitle {
+            color: #e0e0e0;
+            margin-bottom: 2rem;
+        }
+
+        .donation-methods {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .donation-method {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .donation-method:hover {
+            transform: translateY(-5px);
+        }
+
+        .donation-method img {
+            width: 200px;
+            height: 200px;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .donation-method-title {
+            color: #00ffaa;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
@@ -374,6 +426,20 @@
                 <div class="hot-news-feature">
                     <span class="hot-news-feature-icon">📊</span>
                     <span>Enhanced Progress Tracking</span>
+                </div>
+            </div>
+        </div>
+        <div class="donation-section">
+            <h2 class="donation-title">Support AutoSRT</h2>
+            <p class="donation-subtitle">If you find AutoSRT helpful, consider supporting its development! ❤️</p>
+            <div class="donation-methods">
+                <div class="donation-method">
+                    <img src="./images/alipay.png" alt="Alipay QR Code">
+                    <div class="donation-method-title">Alipay 支付宝</div>
+                </div>
+                <div class="donation-method">
+                    <img src="./images/weixin_pay.png" alt="WeChat Pay QR Code">
+                    <div class="donation-method-title">WeChat Pay 微信支付</div>
                 </div>
             </div>
         </div>

@@ -10,6 +10,16 @@ AutoSRT App Home Page. AutoSRT is an application that automatically generates En
 - Support export video with subtitles.
 - Support video quality control. (1080p, 720p, low, medium, high)
 
+## Releases
+
+### v2.0.0
+
+- Accuracy translation of subtitles than before
+- Speed up rendering subtitles than before, about 4x faster
+- Smaller video file size than before, about 1/10
+- More progress bar
+
+
 ## Screenshots
 
 ![Home](https://github.com/yyaadet/autosrt_page/blob/main/screenshots/home.png)
@@ -24,7 +34,7 @@ AutoSRT App Home Page. AutoSRT is an application that automatically generates En
 MacOS M1 or later is required.
 
 1. Install Ollama [https://ollama.com/](https://ollama.com/).
-2. Download [AutoSRT](https://github.com/yyaadet/AutoSRT/releases).
+2. Download [AutoSRT](https://github.com/yyaadet/autosrt_page/releases).
 
 ## Thanks
 

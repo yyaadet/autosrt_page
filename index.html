@@ -13,7 +13,7 @@
         }
 
         body {
-            background: #121212;
+            background: #0a0a0a;
             color: #ffffff;
             line-height: 1.6;
         }
@@ -28,6 +28,7 @@
             text-align: center;
             padding: 4rem 0;
             background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
             color: white;
             margin: -2rem -2rem 2rem -2rem;
         }
@@ -37,6 +38,8 @@
             font-weight: 800;
             margin-bottom: 1rem;
             letter-spacing: -1px;
+            color: #00ffaa;
+            text-shadow: 0 0 10px rgba(0, 255, 170, 0.3);
         }
 
         .subtitle {
@@ -44,6 +47,7 @@
             opacity: 0.9;
             max-width: 600px;
             margin: 0 auto 2rem auto;
+            color: #e0e0e0;
         }
 
         .upload-section {
@@ -77,37 +81,69 @@
         }
 
         .feature-card {
-            background: #1e1e1e;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 10px;
             padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .feature-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 170, 0.1);
         }
 
         .feature-icon {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
-            color: #6c5ce7;
+        }
+
+        .feature-card h3 {
+            color: #00ffaa;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #b0b0b0;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 1rem 2rem;
-            background: #6c5ce7;
-            color: white;
+            background: linear-gradient(135deg, #00ffaa 0%, #00cc88 100%);
+            color: #000000;
             text-decoration: none;
-            border-radius: 30px;
+            padding: 1rem 2rem;
+            border-radius: 5px;
             font-weight: 600;
+            margin: 0 10px;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 255, 170, 0.2);
         }
 
         .cta-button:hover {
-            background: #5b4cc4;
-            transform: scale(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 255, 170, 0.3);
+        }
+
+        .github-button {
+            display: inline-block;
+            background: #2d2d2d;
+            color: #00ffaa;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-weight: 600;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            border: 1px solid #00ffaa;
+            box-shadow: 0 4px 15px rgba(0, 255, 170, 0.1);
+        }
+
+        .github-button:hover {
+            background: #333333;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 255, 170, 0.2);
         }
 
         .supported-formats {
@@ -126,36 +162,13 @@
             color: #aaa;
         }
 
-        footer {
-            text-align: center;
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid #333;
-            color: #888;
-        }
-
-        .thanks {
-            text-align: center;
-            margin: 3rem 0;
-            color: #888;
-        }
-
-        .thanks a {
-            color: #6c5ce7;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .thanks a:hover {
-            color: #8f7ff8;
-        }
-
         .screenshots {
             margin: 4rem 0;
         }
 
         .screenshots h2 {
             text-align: center;
+            color: #00ffaa;
             margin-bottom: 2rem;
         }
 
@@ -167,16 +180,10 @@
         }
 
         .screenshot-item {
-            position: relative;
-            border-radius: 12px;
+            background: #1a1a1a;
+            border-radius: 10px;
             overflow: hidden;
-            background: #1e1e1e;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-            aspect-ratio: 16 / 9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
         }
 
         .screenshot-item:hover {
@@ -193,24 +200,95 @@
         }
 
         .screenshot-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.8);
             padding: 1rem;
+            background: #1a1a1a;
+            color: #e0e0e0;
+        }
+
+        .thanks {
+            text-align: center;
+            margin: 4rem 0;
+            padding: 2rem;
+            background: #1a1a1a;
+            border-radius: 10px;
+        }
+
+        .thanks a {
+            color: #00ffaa;
+            text-decoration: none;
+        }
+
+        .thanks a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #808080;
+            border-top: 1px solid #333;
+        }
+
+        .hot-news {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-left: 4px solid #00ffaa;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 255, 170, 0.1);
+        }
+
+        .hot-news-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .hot-news-badge {
+            background: linear-gradient(135deg, #ff3366 0%, #ff0044 100%);
             color: white;
-            font-size: 0.9rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-right: 1rem;
+            animation: pulse 2s infinite;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        .hot-news-title {
+            color: #00ffaa;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
 
-        .floating-icon {
-            animation: float 3s ease-in-out infinite;
+        .hot-news-content {
+            color: #e0e0e0;
+        }
+
+        .hot-news-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .hot-news-feature {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            background: rgba(0, 255, 170, 0.05);
+            border-radius: 6px;
+        }
+
+        .hot-news-feature-icon {
+            margin-right: 0.5rem;
+            color: #00ffaa;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
@@ -220,7 +298,36 @@
             <div class="logo">AutoSRT</div>
             <p class="subtitle">Transform your videos with automatic subtitle generation powered by advanced AI</p>
             <a href="https://github.com/yyaadet/autosrt_page/releases/download/v1.0.0/AutoSRT-v1.0.0.dmg" class="cta-button">Start Converting Now</a>
+            <a href="https://github.com/yyaadet/autosrt_page" class="github-button">View on GitHub</a>
         </header>
+
+        <div class="hot-news">
+            <div class="hot-news-header">
+                <span class="hot-news-badge">NEW</span>
+                <span class="hot-news-title">Version 2.0.0 Released! 🎉</span>
+            </div>
+            <div class="hot-news-content">
+                We're excited to announce the release of AutoSRT v2.0.0 with major improvements!
+            </div>
+            <div class="hot-news-features">
+                <div class="hot-news-feature">
+                    <span class="hot-news-feature-icon">🎯</span>
+                    <span>Higher Translation Accuracy</span>
+                </div>
+                <div class="hot-news-feature">
+                    <span class="hot-news-feature-icon">⚡</span>
+                    <span>4x Faster Rendering</span>
+                </div>
+                <div class="hot-news-feature">
+                    <span class="hot-news-feature-icon">📦</span>
+                    <span>90% Smaller File Size</span>
+                </div>
+                <div class="hot-news-feature">
+                    <span class="hot-news-feature-icon">📊</span>
+                    <span>Enhanced Progress Tracking</span>
+                </div>
+            </div>
+        </div>
 
         <div class="features">
             <div class="feature-card">

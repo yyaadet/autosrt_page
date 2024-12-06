@@ -307,7 +307,7 @@
             padding-top: 56.25%; /* 16:9 Aspect Ratio */
         }
 
-        .video-container iframe {
+        .video-container video {
             position: absolute;
             top: 0;
             left: 0;
@@ -315,6 +315,7 @@
             height: 100%;
             border: none;
             border-radius: 12px;
+            object-fit: cover;
         }
 
         .video-title {
@@ -370,11 +371,10 @@
         <div class="video-section">
             <h2 class="video-title">See How It Works</h2>
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1" 
-                        title="AutoSRT v2.0.0 Demo" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                </iframe>
+                <video controls autoplay>
+                    <source src="https://raw.githubusercontent.com/yyaadet/autosrt_page/main/videos/autosrt_v2_intro_libx264_subtitles.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
         </div>
 

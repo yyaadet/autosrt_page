@@ -372,6 +372,27 @@
                 <p>Download now to experience enhanced subtitle generation across more languages!</p>
             </div>
         </div>
+
+        <div class="hot-news">
+            <div class="hot-news-header">
+                <span class="hot-news-badge">HELP</span>
+                <div class="hot-news-title">Troubleshooting: macOS Security Warning</div>
+            </div>
+            <div class="hot-news-content">
+                <p>If you see a security warning saying "Apple cannot verify this app for malware", follow these steps:</p>
+                <ol style="margin: 1rem 0; padding-left: 1.5rem;">
+                    <li style="margin: 0.5rem 0;">Open Terminal (press Command+Space and search for Terminal)</li>
+                    <li style="margin: 0.5rem 0;">Run these commands:
+                        <pre style="background: var(--card-bg); padding: 1rem; border-radius: 8px; margin: 0.5rem 0; overflow-x: auto;">
+cd /Applications
+sudo xattr -rd com.apple.quarantine /Applications/AutoSRT.app</pre>
+                    </li>
+                    <li style="margin: 0.5rem 0;">Enter your password when prompted</li>
+                </ol>
+                <p>That's it! The app should now open normally.</p>
+            </div>
+        </div>
+
         <div class="donation-section">
             <h2 class="donation-title">Support AutoSRT</h2>
             <p class="donation-subtitle">If you find AutoSRT helpful, consider supporting its development! ❤️</p>
@@ -386,6 +407,7 @@
                 </div>
             </div>
         </div>
+
         <div class="video-section">
             <h2 class="video-title">See How It Works</h2>
             <div class="video-container">
@@ -395,7 +417,6 @@
                 </video>
             </div>
         </div>
-
 
         <section class="screenshots">
             <h2>See AutoSRT in Action</h2>

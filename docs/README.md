@@ -43,6 +43,20 @@ MacOS M1 or later is required.
 1. Install Ollama [https://ollama.com/](https://ollama.com/).
 2. Download [AutoSRT](https://github.com/yyaadet/autosrt_page/releases).
 
+
+Solve macOS App Opening Issue in One Minute!
+Fix the error: "Apple cannot verify that 'App Cleaner & Uninstaller' does not contain malware that may harm your Mac or compromise your privacy."
+
+1. Open Terminal (press Command+Space and search for Terminal)
+2. Enter these two commands:
+```
+cd /Applications (navigate to the applications folder)
+sudo xattr -rd com.apple.quarantine /Applications/xxxxxx.app (use Tab key to auto-complete)
+```
+3. Enter your user password
+
+Done!
+
 ## Thanks
 
 - [Slot Finder](https://www.51zhi.com/)

@@ -34,6 +34,18 @@ AutoSRT 应用主页。AutoSRT 是一个可以自动从视频文件生成英文�
 1. 安装 Ollama [https://ollama.com/](https://ollama.com/)
 2. 下载 [AutoSRT](https://github.com/yyaadet/autosrt_page/releases)
 
+
+一分钟解决Mac APP无法打开！
+解决报错：“Apple 无法验证 ‘App Cleaner & Uninstaller’ 是否包含可能危害 Mac 安全或泄漏隐私的恶意软件。”
+
+1.打开command+空格搜索Terminal
+2.输入2行代码：
+
+cd /Applications (定位至软件安装位置)
+sudo xattr -rd com.apple.quarantine /Applications/xxxxxx.app （可以用Tab键补全）
+3.输入用户密码
+完成！
+
 ## 致谢
 
 - [Slot Finder](https://www.51zhi.com/)

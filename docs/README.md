@@ -21,6 +21,12 @@ AutoSRT is a powerful desktop application that automatically generates English a
 - More progress bar
 
 
+### v3.0.0
+
+- Add llama3.2 model detection
+- Add llama3.2 model pulling
+- Support Chinese, English, Japanese, Korean, Spanish, Arabic, French, Portuguese, German, Russian, Italian, Korean translation
+
 ## Screenshots
 
 ![Home](https://github.com/yyaadet/autosrt_page/blob/main/screenshots/home.png)

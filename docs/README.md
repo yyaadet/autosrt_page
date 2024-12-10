@@ -1,14 +1,15 @@
 # AutoSRT
 
-AutoSRT App Home Page. AutoSRT is an application that automatically generates English and Chinese subtitles from video files.
+AutoSRT is a powerful desktop application that automatically generates English and Chinese subtitles from video files. Running entirely offline on your local machine, it ensures complete privacy and data security while delivering professional-quality subtitles.
 
 ## Features
 
-- Automatically generates English subtitles from video files.
-- Automatically generates Chinese subtitles from video files.
-- Support export subtitles to SRT format.
-- Support export video with subtitles.
-- Support video quality control. (1080p, 720p, low, medium, high)
+- 🔒 **100% Local Processing**: All operations run offline on your machine, ensuring complete privacy
+- 🎯 **High-Quality Subtitles**: Automatically generates accurate English and Chinese subtitles
+- 💾 **Flexible Export Options**: Export subtitles to SRT format or directly embed them into videos
+- 🎥 **Video Quality Control**: Support for various quality settings (1080p, 720p, low, medium, high)
+- ⚡ **Fast Processing**: 4x faster rendering compared to previous versions
+- 🔐 **Data Security**: Your videos never leave your computer, guaranteeing complete privacy
 
 ## Releases
 

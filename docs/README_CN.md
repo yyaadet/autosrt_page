@@ -1,16 +1,21 @@
 # AutoSRT
 
-AutoSRT 应用主页。AutoSRT 是一个可以自动从视频文件生成英文和中文字幕的应用程序。
+AutoSRT 是一款功能强大的桌面应用程序，可以自动从视频文件生成英文和中文字幕。所有处理完全在本地计算机上进行，确保了数据隐私和安全性的同时，还能提供专业质量的字幕。
 
 ## 功能特点
 
-- 自动从视频文件生成英文字幕
-- 自动从视频文件生成中文字幕
-- 支持导出 SRT 格式字幕
-- 支持导出带字幕的视频
-- 支持视频质量控制（1080p、720p、低质量、中等质量、高质量）
+- 🔒 **100% 本地处理**：所有操作都在您的计算机上离线运行，确保完全的隐私安全
+- 🎯 **高质量字幕**：自动生成准确的英文和中文字幕
+- 💾 **灵活的导出选项**：支持导出 SRT 格式字幕或直接嵌入到视频中
+- 🎥 **视频质量控制**：支持多种质量设置（1080p、720p、低质量、中等质量、高质量）
+- ⚡ **快速处理**：与之前版本相比，渲染速度提升4倍
+- 🔐 **数据安全**：您的视频永远不会离开您的计算机，保证完全的隐私
 
 ## 发布版本
+
+### v3.0.2
+
+- 添加应用签名，修复 macOS 安全警告
 
 ### v2.0.0
 
@@ -34,16 +39,22 @@ AutoSRT 应用主页。AutoSRT 是一个可以自动从视频文件生成英文�
 1. 安装 Ollama [https://ollama.com/](https://ollama.com/)
 2. 下载 [AutoSRT](https://github.com/yyaadet/autosrt_page/releases)
 
+一分钟解决 macOS 应用打开问题！
+修复错误："Apple 无法验证此 App 是否包含恶意软件，可能会损害您的 Mac 或泄露您的隐私。"
 
-一分钟解决Mac APP无法打开！
-解决报错：“Apple 无法验证 ‘App Cleaner & Uninstaller’ 是否包含可能危害 Mac 安全或泄漏隐私的恶意软件。”
+1. 打开终端（按 Command+Space 并搜索"终端"）
+2. 输入以下两个命令：
+```
+sudo spctl --master-disable
 
-1.打开command+空格搜索Terminal
-2.输入2行代码：
+# (进入应用程序文件夹)
+cd /Applications 
 
-cd /Applications (定位至软件安装位置)
-sudo xattr -rd com.apple.quarantine /Applications/xxxxxx.app （可以用Tab键补全）
-3.输入用户密码
+# (使用 Tab 键自动补全)
+sudo xattr -rd com.apple.quarantine /Applications/AutoSRT.app 
+```
+3. 输入您的用户密码
+
 完成！
 
 ## 致谢

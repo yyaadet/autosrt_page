@@ -13,12 +13,10 @@ AutoSRT is a powerful desktop application that automatically generates English a
 
 ## Releases
 
-### v2.0.0
 
-- Accuracy translation of subtitles than before
-- Speed up rendering subtitles than before, about 4x faster
-- Smaller video file size than before, about 1/10
-- More progress bar
+### v3.0.2
+
+- Add app signature, fix macOS security warning
 
 
 ### v3.0.0
@@ -26,6 +24,15 @@ AutoSRT is a powerful desktop application that automatically generates English a
 - Add llama3.2 model detection
 - Add llama3.2 model pulling
 - Support Chinese, English, Japanese, Korean, Spanish, Arabic, French, Portuguese, German, Russian, Italian, Korean translation
+
+
+### v2.0.0
+
+- Accuracy translation of subtitles than before
+- Speed up rendering subtitles than before, about 4x faster
+- Smaller video file size than before, about 1/10
+- More progress bar
+
 
 ## Screenshots
 
@@ -43,15 +50,19 @@ MacOS M1 or later is required.
 1. Install Ollama [https://ollama.com/](https://ollama.com/).
 2. Download [AutoSRT](https://github.com/yyaadet/autosrt_page/releases).
 
-
 Solve macOS App Opening Issue in One Minute!
 Fix the error: "Apple cannot verify that 'App Cleaner & Uninstaller' does not contain malware that may harm your Mac or compromise your privacy."
 
 1. Open Terminal (press Command+Space and search for Terminal)
 2. Enter these two commands:
 ```
-cd /Applications (navigate to the applications folder)
-sudo xattr -rd com.apple.quarantine /Applications/xxxxxx.app (use Tab key to auto-complete)
+sudo spctl --master-disable
+
+#(navigate to the applications folder)
+cd /Applications 
+
+# (use Tab key to auto-complete)
+sudo xattr -rd com.apple.quarantine /Applications/AutoSRT.app 
 ```
 3. Enter your user password
 

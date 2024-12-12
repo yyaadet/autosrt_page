@@ -285,12 +285,12 @@
             border: 1px solid var(--card-border);
         }
 
-        .thanks a {
+        a {
             color: var(--accent-primary);
             text-decoration: none;
         }
 
-        .thanks a:hover {
+        a:hover {
             text-decoration: underline;
         }
 
@@ -299,6 +299,12 @@
             padding: 2rem;
             color: var(--text-secondary);
             border-top: 1px solid var(--card-border);
+        }
+
+        .contact-section {
+            text-align: center;
+            padding: 2rem 0;
+            background-color: var(--bg-secondary);
         }
 
         @media (max-width: 768px) {
@@ -355,21 +361,40 @@
                 <h3>Fast Local Processing</h3>
                 <p>Get your subtitles quickly with native processing power. No uploading or waiting for servers.</p>
             </div>
+            <div class="feature-card">
+                <div class="feature-icon">📝</div>
+                <h3>Advanced Subtitle Editor</h3>
+                <p>Edit, search, and batch replace subtitles with ease. Make your subtitles perfect in no time.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>Flexible Model Support</h3>
+                <p>Switch between different LLM models like llama, whisper, and more easily. Get the best model for your subtitles.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔤</div>
+                <h3>Customizable Font Size</h3>
+                <p>Choose from small, medium, or large font sizes to match your viewing preferences and ensure comfortable subtitle reading.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <h3>Context-Aware Translation</h3>
+                <p>Smart subtitle translation that considers the context of the entire conversation, ensuring more accurate and natural translations.</p>
+            </div>
         </div>
-
         <div class="hot-news">
             <div class="hot-news-header">
                 <span class="hot-news-badge">NEW</span>
-                <div class="hot-news-title">Version 3.0.2 Released! 🎉</div>
+                <div class="hot-news-title">Version 5.0.0 Released! 🎉</div>
             </div>
             <div class="hot-news-content">
-                <p>We're excited to announce AutoSRT v3.0.2 with major improvements:</p>
+                <p>We're excited to announce AutoSRT v5.0.0 with major improvements and new features:</p>
                 <ul style="list-style: none; padding: 0; margin: 1rem 0;">
-                    <li style="margin: 0.5rem 0;">🤖 Advanced LLaMA 3.2 Model Integration</li>
-                    <li style="margin: 0.5rem 0;">🌍 Expanded Language Support: Now includes Chinese, English, Japanese, Korean, Spanish, Arabic, French, Portuguese, German, Russian, and Italian</li>
-                    <li style="margin: 0.5rem 0;">🔄 Automatic Model Detection and Pulling</li>
+                    <li style="margin: 0.5rem 0;">🔍 Batch Replace Subtitles</li>
+                    <li style="margin: 0.5rem 0;">💡 More Accurate Subtitle Translation</li>
+                    <li style="margin: 0.5rem 0;">🤖 Larger and More Intelligent Subtitle Translate Model</li>
                 </ul>
-                <p>Download now to experience enhanced subtitle generation across more languages!</p>
+                <p>Download now to experience the most powerful video subtitle generation tool ever!</p>
             </div>
         </div>
 
@@ -426,24 +451,29 @@ sudo xattr -rd com.apple.quarantine /Applications/AutoSRT.app</pre>
             <div class="screenshot-grid">
                 <div class="screenshot-item">
                     <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/home.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/home.png" alt="Home Interface">
-                    <div class="screenshot-caption">Home Interface - Upload your video</div>
+                    <div class="screenshot-caption">Processing - Select your video, Generate subtitles</div>
                 </div>
                 <div class="screenshot-item">
                     <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/processing.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/processing.png" alt="Processing Screen">
-                    <div class="screenshot-caption">Processing - Real-time transcription</div>
+                    <div class="screenshot-caption">Edit subtitles - Edit, search, and batch replace</div>
                 </div>
                 <div class="screenshot-item">
                     <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/done.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/done.png" alt="Completion Screen">
-                    <div class="screenshot-caption">Done - Ready to download</div>
+                    <div class="screenshot-caption">Done - Ready to export srt file and new video file</div>
                 </div>
             </div>
         </section>
 
-        <section class="thanks">
-            <p>Special thanks to <a href="https://www.51zhi.com/" target="_blank" rel="noopener noreferrer">Slot Finder</a> for their support.</p>
+        <section class="contact-section" style="text-align: center; padding: 2rem 0; background-color: var(--bg-secondary);">
+            <h2 style="color: var(--accent-primary); margin-bottom: 1rem;">Contact</h2>
+            <p style="font-size: 1.1rem; line-height: 1.6;">
+                <span style="margin-right: 2rem;">WeChat: yyaadet2002</span>
+                <span>X (Twitter): <a href="https://twitter.com/yyaadet" style="color: var(--accent-primary); text-decoration: none;">@yyaadet</a></span>
+            </p>
         </section>
 
         <footer>
+            <p>Special thanks to <a href="https://www.51zhi.com/" target="_blank" rel="noopener noreferrer">Slot Finder</a> for their support.</p>
             <p> 2024 AutoSRT. All rights reserved.</p>
         </footer>
     </div>

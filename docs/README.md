@@ -11,28 +11,6 @@ AutoSRT is a powerful desktop application that automatically generates English a
 - ⚡ **Fast Processing**: 4x faster rendering compared to previous versions
 - 🔐 **Data Security**: Your videos never leave your computer, guaranteeing complete privacy
 
-## Releases
-
-
-### v3.0.2
-
-- Add app signature, fix macOS security warning
-
-
-### v3.0.0
-
-- Add llama3.2 model detection
-- Add llama3.2 model pulling
-- Support Chinese, English, Japanese, Korean, Spanish, Arabic, French, Portuguese, German, Russian, Italian, Korean translation
-
-
-### v2.0.0
-
-- Accuracy translation of subtitles than before
-- Speed up rendering subtitles than before, about 4x faster
-- Smaller video file size than before, about 1/10
-- More progress bar
-
 
 ## Screenshots
 

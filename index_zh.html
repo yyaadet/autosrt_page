@@ -50,21 +50,23 @@
         }
 
         :root {
-            --bg-primary: #1a1b26;
-            --bg-secondary: #24283b;
-            --text-primary: #c0caf5;
-            --text-secondary: #9aa5ce;
-            --accent-primary: #7aa2f7;
-            --accent-secondary: #bb9af7;
-            --card-bg: #1f2335;
-            --card-border: #414868;
+            --bg-primary: #fff;
+            --bg-secondary: #f8f1f1;
+            --text-primary: #2c3e50;
+            --text-secondary: #34495e;
+            --accent-primary: #c41e3a;  /* 圣诞红 */
+            --accent-secondary: #165b33;  /* 圣诞绿 */
+            --card-bg: #ffffff;
+            --card-border: rgba(22, 91, 51, 0.1);  /* 浅圣诞绿 */
+            --button-hover: #d4213f;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             line-height: 1.6;
-            background-color: var(--bg-primary);
             color: var(--text-primary);
+            background-color: var(--bg-primary);
+            background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="1" fill="%23c41e3a" opacity="0.1"/></svg>');
         }
 
         .container {
@@ -75,68 +77,139 @@
 
         header {
             text-align: center;
-            margin-bottom: 3rem;
+            padding: 3rem 1rem;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 添加雪花装饰 */
+        header::before,
+        header::after {
+            content: "❄";
+            position: absolute;
+            color: var(--accent-primary);
+            opacity: 0.2;
+            font-size: 2rem;
+            animation: snow 10s linear infinite;
+        }
+
+        header::before {
+            left: 5%;
+            animation-delay: -5s;
+        }
+
+        header::after {
+            right: 5%;
+            animation-delay: -2.5s;
+        }
+
+        @keyframes snow {
+            0% { transform: translateY(-100%) rotate(0deg); }
+            100% { transform: translateY(1000%) rotate(360deg); }
         }
 
         .logo {
-            font-size: 2.5rem;
+            font-size: 4rem;
             font-weight: bold;
+            text-align: center;
+            color: var(--accent-primary);
+            margin: 2rem auto;
+            text-shadow: 3px 3px 6px rgba(196, 30, 58, 0.2);
+            font-family: 'Arial Black', 'Helvetica Neue', sans-serif;
+            letter-spacing: 2px;
+            width: 100%;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* 添加闪光效果到 logo */
+        .logo::before,
+        .logo::after {
+            content: "✨";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            opacity: 0.8;
+        }
+
+        .logo::before {
+            left: -3rem;
+        }
+
+        .logo::after {
+            right: -3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
             color: var(--accent-primary);
             margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h1::before,
+        h1::after {
+            content: "🎄";
+            margin: 0 10px;
+            font-size: 2rem;
         }
 
         .subtitle {
             font-size: 1.2rem;
             color: var(--text-secondary);
             margin-bottom: 2rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-button, .github-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            margin: 0.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .cta-button {
-            background-color: var(--accent-primary);
-            color: var(--bg-primary);
         }
 
         .github-button {
-            background-color: var(--card-bg);
-            color: var(--text-primary);
-            border: 1px solid var(--card-border);
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--accent-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
 
-        .cta-button:hover, .github-button:hover {
+        .github-button:hover {
+            background-color: var(--button-hover);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 12px rgba(196, 30, 58, 0.2);
         }
 
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            margin: 3rem 0;
+            padding: 2rem 0;
         }
 
         .feature-card {
-            background-color: var(--card-bg);
+            background: var(--card-bg);
             padding: 2rem;
             border-radius: 12px;
-            border: 1px solid var(--card-border);
+            box-shadow: 0 4px 12px var(--card-border);
             transition: transform 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
         }
 
         .feature-card:hover {
             transform: translateY(-5px);
+            border-color: var(--accent-secondary);
+        }
+
+        /* 添加圣诞树装饰 */
+        .feature-card::after {
+            content: "🎄";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 1.2rem;
+            opacity: 0.8;
+            transform: rotate(15deg);
         }
 
         .feature-icon {
@@ -144,23 +217,76 @@
             margin-bottom: 1rem;
         }
 
-        .feature-card h3 {
-            color: var(--accent-secondary);
-            margin-bottom: 1rem;
+        .hot-news {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 12px var(--card-border);
+            border: 2px solid var(--accent-primary);
+            position: relative;
         }
 
-        .feature-card p {
-            color: var(--text-secondary);
+        /* 添加圣诞老人装饰 */
+        .hot-news::before {
+            content: "🎅";
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            font-size: 2rem;
+            transform: rotate(-15deg);
+        }
+
+        .hot-news-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }
+
+        .hot-news-badge {
+            background-color: var(--accent-primary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .hot-news-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-primary);
         }
 
         .screenshots {
             margin: 3rem 0;
+            position: relative;
+        }
+
+        /* 添加圣诞装饰到截图区域 */
+        .screenshots::before,
+        .screenshots::after {
+            content: "🎄";
+            position: absolute;
+            top: -10px;
+            font-size: 2rem;
+        }
+
+        .screenshots::before {
+            left: 20px;
+        }
+
+        .screenshots::after {
+            right: 20px;
         }
 
         .screenshots h2 {
             text-align: center;
             color: var(--accent-primary);
             margin-bottom: 2rem;
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
         .screenshot-grid {
@@ -170,10 +296,18 @@
         }
 
         .screenshot-item {
-            background-color: var(--card-bg);
+            background: var(--card-bg);
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid var(--card-border);
+            border: 2px solid var(--accent-secondary);
+            box-shadow: 0 4px 12px var(--card-border);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .screenshot-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px var(--card-border);
         }
 
         .screenshot-item img {
@@ -187,38 +321,8 @@
             padding: 1rem;
             text-align: center;
             color: var(--text-secondary);
-        }
-
-        .hot-news {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 3rem 0;
-            border: 1px solid var(--card-border);
-        }
-
-        .hot-news-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .hot-news-badge {
-            background-color: var(--accent-secondary);
-            color: var(--bg-primary);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: bold;
-            margin-right: 1rem;
-        }
-
-        .hot-news-title {
-            color: var(--text-primary);
-            font-size: 1.2rem;
-        }
-
-        .hot-news-content {
-            color: var(--text-secondary);
+            background: linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary));
+            font-weight: 500;
         }
 
         .donation-section {
@@ -462,7 +566,7 @@
             <div class="feature-card">
                 <div class="feature-icon">🌍</div>
                 <h3>丰富的语言支持</h3>
-                <p>生成多种语言的字幕：中文、英语、日语、韩语、西班牙语、阿拉伯语、法语、葡萄牙语、德语、俄语、意大利语。</p>
+                <p>支持多种语言字幕生成：中文、英语、日语、韩语、西班牙语、阿拉伯语、法语、葡萄牙语、德语、俄语、意大利语、泰语。</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">💝</div>
@@ -497,8 +601,24 @@
         </div>
         <div class="hot-news">
             <div class="hot-news-header">
-                <span class="hot-news-badge">新</span>
-                <div class="hot-news-title">版本 5.0.0 发布！🎉</div>
+                <span class="hot-news-badge">新版本</span>
+                <div class="hot-news-title">7.1.0 版本发布！🎉</div>
+            </div>
+            <div class="hot-news-content">
+                <p>我们很高兴地宣布 AutoSRT v7.1.0 带来了新的改进：</p>
+                <ul style="list-style: none; padding: 0; margin: 1rem 0;">
+                    <li style="margin: 0.5rem 0;">🎯 修复字幕对齐问题</li>
+                    <li style="margin: 0.5rem 0;">🌏 新增泰语支持</li>
+                    <li style="margin: 0.5rem 0;">✨ 改进视频中的字幕效果</li>
+                </ul>
+                <p>立即更新体验这些新功能！</p>
+            </div>
+        </div>
+
+        <div class="hot-news">
+            <div class="hot-news-header">
+                <span class="hot-news-badge">新版本</span>
+                <div class="hot-news-title">5.0.0 版本发布！🎉</div>
             </div>
             <div class="hot-news-content">
                 <p>我们很高兴地宣布 AutoSRT v5.0.0，带来了重大改进和新功能：</p>
@@ -534,6 +654,24 @@ sudo xattr -rd com.apple.quarantine /Applications/AutoSRT.app</pre>
             </div>
         </div>
 
+        <div class="screenshots">
+            <h2>查看 AutoSRT 的实际效果</h2>
+            <div class="screenshot-grid">
+                <div class="screenshot-item">
+                    <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/home.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/home.png" alt="主页界面">
+                    <div class="screenshot-caption">处理 - 选择您的视频，生成字幕</div>
+                </div>
+                <div class="screenshot-item">
+                    <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/processing.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/processing.png" alt="处理屏幕">
+                    <div class="screenshot-caption">编辑字幕 - 编辑、搜索和批量替换</div>
+                </div>
+                <div class="screenshot-item">
+                    <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/done.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/done.png" alt="完成屏幕">
+                    <div class="screenshot-caption">完成 - 准备导出 srt 文件和新视频文件</div>
+                </div>
+            </div>
+        </div>
+
         <div class="donation-section">
             <h2 class="donation-title">支持 AutoSRT</h2>
             <p class="donation-subtitle">如果您觉得 AutoSRT 有帮助，请考虑支持其开发！❤️</p>
@@ -558,24 +696,6 @@ sudo xattr -rd com.apple.quarantine /Applications/AutoSRT.app</pre>
                 </video>
             </div>
         </div>
-
-        <section class="screenshots">
-            <h2>查看 AutoSRT 的实际效果</h2>
-            <div class="screenshot-grid">
-                <div class="screenshot-item">
-                    <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/home.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/home.png" alt="主页界面">
-                    <div class="screenshot-caption">处理 - 选择您的视频，生成字幕</div>
-                </div>
-                <div class="screenshot-item">
-                    <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/processing.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/processing.png" alt="处理屏幕">
-                    <div class="screenshot-caption">编辑字幕 - 编辑、搜索和批量替换</div>
-                </div>
-                <div class="screenshot-item">
-                    <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/done.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/done.png" alt="完成屏幕">
-                    <div class="screenshot-caption">完成 - 准备导出 srt 文件和新视频文件</div>
-                </div>
-            </div>
-        </section>
 
         <!-- 社交分享部分 -->
         <section class="social-share container">

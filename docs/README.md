@@ -12,6 +12,14 @@ AutoSRT is a powerful desktop application that automatically generates English a
 - 🔐 **Data Security**: Your videos never leave your computer, guaranteeing complete privacy
 
 
+## Latest Release
+
+### v7.1.0 (2024-12-18)
+
+- Fix subtitle alignment bug
+- Support Thai translation
+- Improve subtitle effect in the video
+
 ## Screenshots
 
 ![Home](https://github.com/yyaadet/autosrt_page/blob/main/screenshots/home.png)

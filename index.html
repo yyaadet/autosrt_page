@@ -49,22 +49,77 @@
             box-sizing: border-box;
         }
 
+        @keyframes flyAcross {
+            0% {
+                transform: translate(100vw, 0) scaleX(-1);
+            }
+            100% {
+                transform: translate(-20%, 0) scaleX(-1);
+            }
+        }
+
+        .santa-sleigh {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            font-size: 2.5rem;
+            z-index: 100;
+            animation: flyAcross 10s linear infinite;
+            white-space: nowrap;
+        }
+
+        .santa-sleigh::after {
+            content: "🦌🦌🛷";
+            text-shadow: 0 0 10px rgba(255,255,255,0.8);
+        }
+
+        /* Add twinkling stars in the background */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            color: var(--accent-primary);
+            opacity: 0.2;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        .star:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .star:nth-child(2) { top: 30%; left: 30%; animation-delay: 0.3s; }
+        .star:nth-child(3) { top: 15%; left: 50%; animation-delay: 0.6s; }
+        .star:nth-child(4) { top: 25%; left: 70%; animation-delay: 0.9s; }
+        .star:nth-child(5) { top: 35%; left: 90%; animation-delay: 1.2s; }
+
         :root {
-            --bg-primary: #1a1b26;
-            --bg-secondary: #24283b;
-            --text-primary: #c0caf5;
-            --text-secondary: #9aa5ce;
-            --accent-primary: #7aa2f7;
-            --accent-secondary: #bb9af7;
-            --card-bg: #1f2335;
-            --card-border: #414868;
+            --bg-primary: #fff;
+            --bg-secondary: #f8f1f1;
+            --text-primary: #2c3e50;
+            --text-secondary: #34495e;
+            --accent-primary: #c41e3a;  /* Christmas red */
+            --accent-secondary: #165b33;  /* Christmas green */
+            --card-bg: #ffffff;
+            --card-border: rgba(22, 91, 51, 0.1);  /* Light Christmas green */
+            --button-hover: #d4213f;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             line-height: 1.6;
-            background-color: var(--bg-primary);
             color: var(--text-primary);
+            background-color: var(--bg-primary);
+            background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="1" fill="%23c41e3a" opacity="0.1"/></svg>');
         }
 
         .container {
@@ -75,68 +130,139 @@
 
         header {
             text-align: center;
-            margin-bottom: 3rem;
+            padding: 3rem 1rem;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Add snowflake decoration */
+        header::before,
+        header::after {
+            content: "❄";
+            position: absolute;
+            color: var(--accent-primary);
+            opacity: 0.2;
+            font-size: 2rem;
+            animation: snow 10s linear infinite;
+        }
+
+        header::before {
+            left: 5%;
+            animation-delay: -5s;
+        }
+
+        header::after {
+            right: 5%;
+            animation-delay: -2.5s;
+        }
+
+        @keyframes snow {
+            0% { transform: translateY(-100%) rotate(0deg); }
+            100% { transform: translateY(1000%) rotate(360deg); }
         }
 
         .logo {
-            font-size: 2.5rem;
+            font-size: 4rem;
             font-weight: bold;
+            text-align: center;
+            color: var(--accent-primary);
+            margin: 2rem auto;
+            text-shadow: 3px 3px 6px rgba(196, 30, 58, 0.2);
+            font-family: 'Arial Black', 'Helvetica Neue', sans-serif;
+            letter-spacing: 2px;
+            width: 100%;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Add sparkle effect to logo */
+        .logo::before,
+        .logo::after {
+            content: "✨";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            opacity: 0.8;
+        }
+
+        .logo::before {
+            left: -3rem;
+        }
+
+        .logo::after {
+            right: -3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
             color: var(--accent-primary);
             margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h1::before,
+        h1::after {
+            content: "🎄";
+            margin: 0 10px;
+            font-size: 2rem;
         }
 
         .subtitle {
             font-size: 1.2rem;
             color: var(--text-secondary);
             margin-bottom: 2rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-button, .github-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            margin: 0.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .cta-button {
-            background-color: var(--accent-primary);
-            color: var(--bg-primary);
         }
 
         .github-button {
-            background-color: var(--card-bg);
-            color: var(--text-primary);
-            border: 1px solid var(--card-border);
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--accent-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
 
-        .cta-button:hover, .github-button:hover {
+        .github-button:hover {
+            background-color: var(--button-hover);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 12px rgba(196, 30, 58, 0.2);
         }
 
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            margin: 3rem 0;
+            padding: 2rem 0;
         }
 
         .feature-card {
-            background-color: var(--card-bg);
+            background: var(--card-bg);
             padding: 2rem;
             border-radius: 12px;
-            border: 1px solid var(--card-border);
+            box-shadow: 0 4px 12px var(--card-border);
             transition: transform 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
         }
 
         .feature-card:hover {
             transform: translateY(-5px);
+            border-color: var(--accent-secondary);
+        }
+
+        /* Add holly decoration to cards */
+        .feature-card::after {
+            content: "🎄";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 1.2rem;
+            opacity: 0.8;
+            transform: rotate(15deg);
         }
 
         .feature-icon {
@@ -144,23 +270,76 @@
             margin-bottom: 1rem;
         }
 
-        .feature-card h3 {
-            color: var(--accent-secondary);
-            margin-bottom: 1rem;
+        .hot-news {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 12px var(--card-border);
+            border: 1px solid var(--accent-primary);
+            position: relative;
         }
 
-        .feature-card p {
-            color: var(--text-secondary);
+        /* Add Christmas decoration to hot news */
+        .hot-news::before {
+            content: "🎅";
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            font-size: 2rem;
+            transform: rotate(-15deg);
+        }
+
+        .hot-news-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }
+
+        .hot-news-badge {
+            background-color: var(--accent-primary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .hot-news-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-primary);
         }
 
         .screenshots {
             margin: 3rem 0;
+            position: relative;
+        }
+
+        /* Add Christmas decorations to screenshots section */
+        .screenshots::before,
+        .screenshots::after {
+            content: "🎄";
+            position: absolute;
+            top: -10px;
+            font-size: 2rem;
+        }
+
+        .screenshots::before {
+            left: 20px;
+        }
+
+        .screenshots::after {
+            right: 20px;
         }
 
         .screenshots h2 {
             text-align: center;
             color: var(--accent-primary);
             margin-bottom: 2rem;
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
         .screenshot-grid {
@@ -170,10 +349,18 @@
         }
 
         .screenshot-item {
-            background-color: var(--card-bg);
+            background: var(--card-bg);
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid var(--card-border);
+            border: 2px solid var(--accent-secondary);
+            box-shadow: 0 4px 12px var(--card-border);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .screenshot-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px var(--card-border);
         }
 
         .screenshot-item img {
@@ -187,38 +374,8 @@
             padding: 1rem;
             text-align: center;
             color: var(--text-secondary);
-        }
-
-        .hot-news {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 3rem 0;
-            border: 1px solid var(--card-border);
-        }
-
-        .hot-news-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .hot-news-badge {
-            background-color: var(--accent-secondary);
-            color: var(--bg-primary);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: bold;
-            margin-right: 1rem;
-        }
-
-        .hot-news-title {
-            color: var(--text-primary);
-            font-size: 1.2rem;
-        }
-
-        .hot-news-content {
-            color: var(--text-secondary);
+            background: linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary));
+            font-weight: 500;
         }
 
         .donation-section {
@@ -445,9 +602,17 @@
     </div>
     <div class="container">
         <header>
+            <div class="stars">
+                <div class="star">⭐️</div>
+                <div class="star">⭐️</div>
+                <div class="star">⭐️</div>
+                <div class="star">⭐️</div>
+                <div class="star">⭐️</div>
+            </div>
+            <div class="santa-sleigh"></div>
             <div class="logo">AutoSRT</div>
             <p class="subtitle">Transform your videos with automatic subtitle generation powered by advanced AI - 100% offline, ensuring complete privacy. Available for macOS.</p>
-            <a href="https://github.com/yyaadet/autosrt_page/releases/" class="cta-button">Download for macOS</a>
+            <a href="https://github.com/yyaadet/autosrt_page/releases/" class="github-button">Download for macOS</a>
             <a href="https://github.com/yyaadet/autosrt_page" class="github-button">View on GitHub</a>
         </header>
         
@@ -460,7 +625,7 @@
             <div class="feature-card">
                 <div class="feature-icon">🌍</div>
                 <h3>Rich Language Support</h3>
-                <p>Generate subtitles in multiple languages: Chinese, English, Japanese, Korean, Spanish, Arabic, French, Portuguese, German, Russian, Italian.</p>
+                <p>Generate subtitles in multiple languages: Chinese, English, Japanese, Korean, Spanish, Arabic, French, Portuguese, German, Russian, Italian, Thai.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">💝</div>
@@ -496,16 +661,16 @@
         <div class="hot-news">
             <div class="hot-news-header">
                 <span class="hot-news-badge">NEW</span>
-                <div class="hot-news-title">Version 5.0.0 Released! 🎉</div>
+                <div class="hot-news-title">Version 7.1.0 Released! 🎉</div>
             </div>
             <div class="hot-news-content">
-                <p>We're excited to announce AutoSRT v5.0.0 with major improvements and new features:</p>
+                <p>We're excited to announce AutoSRT v7.1.0 with new improvements:</p>
                 <ul style="list-style: none; padding: 0; margin: 1rem 0;">
-                    <li style="margin: 0.5rem 0;">🔍 Batch Replace Subtitles</li>
-                    <li style="margin: 0.5rem 0;">💡 More Accurate Subtitle Translation</li>
-                    <li style="margin: 0.5rem 0;">🤖 Larger and More Intelligent Subtitle Translate Model</li>
+                    <li style="margin: 0.5rem 0;">🎯 Fixed subtitle alignment issues</li>
+                    <li style="margin: 0.5rem 0;">🌏 Added support for Thai language</li>
+                    <li style="margin: 0.5rem 0;">✨ Improved subtitle effects in videos</li>
                 </ul>
-                <p>Download now to experience the most powerful video subtitle generation tool ever!</p>
+                <p>Update now to experience these enhancements!</p>
             </div>
         </div>
 
@@ -528,6 +693,24 @@ sudo xattr -rd com.apple.quarantine /Applications/AutoSRT.app</pre>
                 <p>That's it! The app should now open normally.</p>
                 <div style="text-align: center; margin-top: 1rem;">
                     <a href="https://github.com/yyaadet/autosrt_page?tab=readme-ov-file#installation" target="_blank" class="github-button">Get More Help</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="screenshots">
+            <h2>See AutoSRT in Action</h2>
+            <div class="screenshot-grid">
+                <div class="screenshot-item">
+                    <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/home.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/home.png" alt="Home Interface">
+                    <div class="screenshot-caption">Processing - Select your video, Generate subtitles</div>
+                </div>
+                <div class="screenshot-item">
+                    <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/processing.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/processing.png" alt="Processing Screen">
+                    <div class="screenshot-caption">Edit subtitles - Edit, search, and batch replace</div>
+                </div>
+                <div class="screenshot-item">
+                    <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/done.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/done.png" alt="Completion Screen">
+                    <div class="screenshot-caption">Done - Ready to export srt file and new video file</div>
                 </div>
             </div>
         </div>
@@ -556,24 +739,6 @@ sudo xattr -rd com.apple.quarantine /Applications/AutoSRT.app</pre>
                 </video>
             </div>
         </div>
-
-        <section class="screenshots">
-            <h2>See AutoSRT in Action</h2>
-            <div class="screenshot-grid">
-                <div class="screenshot-item">
-                    <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/home.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/home.png" alt="Home Interface">
-                    <div class="screenshot-caption">Processing - Select your video, Generate subtitles</div>
-                </div>
-                <div class="screenshot-item">
-                    <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/processing.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/processing.png" alt="Processing Screen">
-                    <div class="screenshot-caption">Edit subtitles - Edit, search, and batch replace</div>
-                </div>
-                <div class="screenshot-item">
-                    <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/done.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/done.png" alt="Completion Screen">
-                    <div class="screenshot-caption">Done - Ready to export srt file and new video file</div>
-                </div>
-            </div>
-        </section>
 
         <!-- Social Share Section -->
         <section class="social-share container">

@@ -15,7 +15,7 @@
             </description>
             <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
             <enclosure
-                url="https://www.github.com/yyaadet/autosrt_page/releases/download/v7.3.0/AutoSRT-v7.0.3.dmg"
+                url="https://github.com/yyaadet/autosrt_page/releases/download/v7.3.0/AutoSRT-v7.3.0.dmg"
                 sparkle:version="7.3.0"
                 length="0"
                 type="application/octet-stream"

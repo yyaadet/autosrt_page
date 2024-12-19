@@ -1,0 +1,27 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>AutoSRT</title>
+        <item>
+            <title>Version 7.3.0</title>
+            <pubDate>Thu, 19 Dec 2023 14:55:07 +0800</pubDate>
+            <sparkle:version>7.3.0</sparkle:version>
+            <sparkle:shortVersionString>7.3.0</sparkle:shortVersionString>
+            <description><![CDATA[
+                <h2>Changes in AutoSRT 7.3.0</h2>
+                <ul>
+                    <li>Fix subtitle garble bug</li>
+                </ul>
+            ]]>
+            </description>
+            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://github.com/pengxiaotao/autosrt/releases/download/v7.3.0/AutoSRT.zip"
+                sparkle:version="7.2.0"
+                sparkle:shortVersionString="7.2.0"
+                length="0"
+                type="application/octet-stream"
+            />
+        </item>
+    </channel>
+</rss>

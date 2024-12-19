@@ -16,9 +16,9 @@
             </description>
             <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
             <enclosure
-                url="https://github.com/pengxiaotao/autosrt/releases/download/v7.3.0/AutoSRT.zip"
-                sparkle:version="7.2.0"
-                sparkle:shortVersionString="7.2.0"
+                url="https://github.com/pengxiaotao/autosrt/releases/download/v7.3.0/AutoSRT-v7.0.3.dmg"
+                sparkle:version="7.3.0"
+                sparkle:shortVersionString="7.3.0"
                 length="0"
                 type="application/octet-stream"
             />

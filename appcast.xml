@@ -6,7 +6,7 @@
             <title>Version 7.3.0</title>
             <pubDate>Thu, 19 Dec 2023 14:55:07 +0800</pubDate>
             <sparkle:version>7.3.0</sparkle:version>
-            <sparkle:shortVersionString>2</sparkle:shortVersionString>
+            <sparkle:shortVersionString>7.3.0</sparkle:shortVersionString>
             <description><![CDATA[
                 <h2>Changes in AutoSRT 7.3.0</h2>
                 <ul>
@@ -18,7 +18,7 @@
             <enclosure
                 url="https://github.com/pengxiaotao/autosrt/releases/download/v7.3.0/AutoSRT-v7.0.3.dmg"
                 sparkle:version="7.3.0"
-                sparkle:shortVersionString="2"
+                sparkle:shortVersionString="7.3.0"
                 length="0"
                 type="application/octet-stream"
             />

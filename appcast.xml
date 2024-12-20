@@ -3,23 +3,26 @@
     <channel>
         <title>AutoSRT</title>
         <item>
-            <title>Version 7.3.0</title>
-            <pubDate>Thu, 19 Dec 2023 14:55:07 +0800</pubDate>
-            <sparkle:version>7.3.0</sparkle:version>
+            <title>7.4.0</title>
+            <pubDate>Fri, 20 Dec 2024 14:07:41 +0800</pubDate>
+            <sparkle:version>400</sparkle:version>
+            <sparkle:shortVersionString>7.4.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
             <description><![CDATA[
-                <h2>Changes in AutoSRT 7.3.0</h2>
+                <h2>Changes in AutoSRT 7.4.0</h2>
                 <ul>
-                    <li>Fix subtitle garble bug</li>
+                    <li>Fix video file name bug. Support video file name with special characters</li>
+                    <li>Support auto update app</li>
                 </ul>
             ]]>
             </description>
-            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
+            <!--
+            https://github.com/yyaadet/autosrt_page/releases/download/v7.4.0/AutoSRT-v7.4.0.dmg 
+            -->
             <enclosure
-                url="https://github.com/yyaadet/autosrt_page/releases/download/v7.3.0/AutoSRT-v7.3.0.dmg"
-                sparkle:version="7.3.0"
-                length="0"
-                type="application/octet-stream"
-            />
+                url="https://github.com/yyaadet/autosrt_page/releases/download/v7.4.0/AutoSRT-v7.4.0.dmg"
+                length="1350969963" type="application/octet-stream" />
+            <sparkle:releaseNotesLink>https://github.com/yyaadet/autosrt_page/releases/tag/v7.4.0</sparkle:releaseNotesLink>
         </item>
     </channel>
 </rss>

@@ -612,6 +612,54 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Add screenshot gallery styles */
+        .screenshot-section {
+            padding: 4rem 0;
+            background-color: var(--bg-secondary);
+        }
+
+        .screenshot-section h2 {
+            text-align: center;
+            color: var(--accent-primary);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .screenshot-item {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .screenshot-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .screenshot-caption {
+            padding: 1rem;
+            color: var(--text-primary);
+            text-align: center;
+            font-size: 1.1rem;
+        }
     </style>
 
     <!-- Google tag (gtag.js) -->
@@ -634,7 +682,9 @@
             <div class="logo">AutoSRT 字幕生成器</div>
             <p class="subtitle">使用 AI 技术为您的视频自动生成字幕，完全离线，确保隐私。适用于 macOS。</p>
             <a href="https://github.com/yyaadet/autosrt_page/releases/" class="cta-button">下载适用于 macOS</a>
-            <a href="https://github.com/yyaadet/autosrt_page" class="github-button">在 GitHub 上查看</a>
+            <div style="margin-top: 20px;">
+                <a href="https://www.producthunt.com/posts/autosrt?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-autosrt" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=729545&theme=dark" alt="AutoSRT - 使用AI即时生成双语字幕 | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+            </div>
         </header>
         
         <div class="features">
@@ -724,23 +774,31 @@ sudo xattr -rd com.apple.quarantine /Applications/AutoSRT.app</pre>
             </div>
         </div>
 
-        <div class="screenshots">
-            <h2>查看 AutoSRT 的实际效果</h2>
+        <section class="screenshot-section">
+            <h2>应用截图</h2>
             <div class="screenshot-grid">
                 <div class="screenshot-item">
-                    <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/home.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/home.png" alt="主页界面">
-                    <div class="screenshot-caption">处理 - 选择您的视频，生成字幕</div>
+                    <img src="settings.png" alt="AutoSRT 设置界面 - 配置 AI 模型和字幕偏好设置" loading="lazy">
+                    <div class="screenshot-caption">强大的设置 - 配置 AI 模型和字幕偏好设置</div>
                 </div>
                 <div class="screenshot-item">
-                    <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/processing.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/processing.png" alt="处理屏幕">
+                    <img src="edit_subtitles.png" alt="AutoSRT 字幕编辑器 - 编辑和微调您的字幕" loading="lazy">
+                    <div class="screenshot-caption">高级字幕编辑器 - 编辑和微调您的字幕</div>
+                </div>
+                <div class="screenshot-item">
+                    <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/home.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/home.png" alt="主界面">
+                    <div class="screenshot-caption">处理 - 选择视频，生成字幕</div>
+                </div>
+                <div class="screenshot-item">
+                    <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/processing.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/processing.png" alt="处理界面">
                     <div class="screenshot-caption">编辑字幕 - 编辑、搜索和批量替换</div>
                 </div>
                 <div class="screenshot-item">
-                    <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/done.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/done.png" alt="完成屏幕">
+                    <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/done.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/done.png" alt="完成界面">
                     <div class="screenshot-caption">完成 - 准备导出 srt 文件和新视频文件</div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <div class="donation-section">
             <h2 class="donation-title">支持 AutoSRT</h2>

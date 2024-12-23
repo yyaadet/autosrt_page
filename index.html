@@ -313,70 +313,51 @@
             color: var(--text-primary);
         }
 
-        .screenshots {
-            margin: 3rem 0;
-            position: relative;
+        .screenshot-section {
+            padding: 4rem 0;
+            background-color: var(--bg-secondary);
         }
 
-        /* Add Christmas decorations to screenshots section */
-        .screenshots::before,
-        .screenshots::after {
-            content: "🎄";
-            position: absolute;
-            top: -10px;
-            font-size: 2rem;
-        }
-
-        .screenshots::before {
-            left: 20px;
-        }
-
-        .screenshots::after {
-            right: 20px;
-        }
-
-        .screenshots h2 {
+        .screenshot-section h2 {
             text-align: center;
             color: var(--accent-primary);
-            margin-bottom: 2rem;
             font-size: 2rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
         }
 
         .screenshot-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
         .screenshot-item {
             background: var(--card-bg);
             border-radius: 12px;
             overflow: hidden;
-            border: 2px solid var(--accent-secondary);
-            box-shadow: 0 4px 12px var(--card-border);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
-            position: relative;
         }
 
         .screenshot-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 24px var(--card-border);
         }
 
         .screenshot-item img {
             width: 100%;
             height: auto;
+            border-radius: 8px;
             display: block;
-            border-radius: 8px 8px 0 0;
         }
 
         .screenshot-caption {
             padding: 1rem;
+            color: var(--text-primary);
             text-align: center;
-            color: var(--text-secondary);
-            background: linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary));
-            font-weight: 500;
+            font-size: 1.1rem;
         }
 
         .donation-section {
@@ -702,6 +683,9 @@
             <p class="subtitle">Save hours with instant AI dual language subtitle generation. 100% offline and native on your Mac for complete privacy. Free forever.</p>
             <a href="https://github.com/yyaadet/autosrt_page/releases/" class="github-button">Download for macOS</a>
             <a href="https://github.com/yyaadet/autosrt_page" class="github-button">View on GitHub</a>
+            <div style="margin-top: 20px;">
+                <a href="https://www.producthunt.com/posts/autosrt?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-autosrt" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=729545&theme=dark" alt="AutoSRT - Save&#0032;hours&#0032;with&#0032;instant&#0032;AI&#0032;dual&#0032;language&#0032;subtitle&#0032;generation | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+            </div>
         </header>
         
         <div class="features">
@@ -793,9 +777,17 @@ sudo xattr -rd com.apple.quarantine /Applications/AutoSRT.app</pre>
             </div>
         </div>
 
-        <div class="screenshots">
-            <h2>See AutoSRT in Action</h2>
+        <section class="screenshot-section">
+            <h2>App Screenshots</h2>
             <div class="screenshot-grid">
+                <div class="screenshot-item">
+                    <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/settings.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/settings.png" alt="AutoSRT Settings Interface - Configure AI models and subtitle preferences" loading="lazy">
+                    <div class="screenshot-caption">Powerful Settings - Configure AI models and subtitle preferences</div>
+                </div>
+                <div class="screenshot-item">
+                    <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/edit_subtitles.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/edit_subtitles.png" alt="AutoSRT Subtitle Editor - Edit and fine-tune your subtitles" loading="lazy">
+                    <div class="screenshot-caption">Advanced Subtitle Editor - Edit and fine-tune your subtitles</div>
+                </div>
                 <div class="screenshot-item">
                     <img src="https://raw.githubusercontent.com/yyaadet/autosrt_page/raw/main/screenshots/home.png" srcset="https://github.com/yyaadet/autosrt_page/raw/main/screenshots/home.png" alt="Home Interface">
                     <div class="screenshot-caption">Processing - Select your video, Generate subtitles</div>
@@ -809,7 +801,7 @@ sudo xattr -rd com.apple.quarantine /Applications/AutoSRT.app</pre>
                     <div class="screenshot-caption">Done - Ready to export srt file and new video file</div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <div class="donation-section">
             <h2 class="donation-title">Support AutoSRT</h2>

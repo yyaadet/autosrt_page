@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoSRT - 自动字幕生成 | AI 驱动的视频字幕工具</title>
+    <title>AutoSRT - AI 双语字幕生成器 | 免费 Mac 应用</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="AutoSRT 是一个强大的 AI 驱动工具，用于自动字幕生成。将语音转换为文本，生成多语言字幕，提升您的视频内容。">
-    <meta name="keywords" content="AutoSRT, 字幕生成, 自动字幕, 视频字幕, AI 字幕, 语音转文字, 视频翻译">
+    <meta name="description" content="AutoSRT：免费的 AI 双语字幕生成器，专为 Mac 设计。即时创建双语字幕，100% 离线运行。完美适用于语言学习、内容创作和国际化视频。#AutoSRT #AI字幕 #双语字幕 #Mac应用">
+    <meta name="keywords" content="AutoSRT, 双语字幕, AI字幕生成器, 视频字幕, 双语字幕生成, 离线字幕生成器, Mac应用, 语言学习, 内容创作, 视频翻译, 自动字幕, 免费字幕工具">
     <meta name="author" content="AutoSRT 团队">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://yyaadet.github.io/autosrt_page/" />
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="AutoSRT - 自动字幕生成">
-    <meta property="og:description" content="使用 AI 自动生成准确的视频字幕。支持多种语言和格式。">
+    <meta property="og:title" content="AutoSRT - AI 双语字幕生成器">
+    <meta property="og:description" content="使用 AI 即时生成双语字幕。100% 离线且免费的 Mac 应用。完美适用于语言学习和内容创作。#AutoSRT #AI字幕 #双语字幕">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yyaadet.github.io/autosrt_page/">
     <meta property="og:image" content="https://yyaadet.github.io/autosrt_page/images/autosrt-preview.png">
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="AutoSRT - 自动字幕生成">
-    <meta name="twitter:description" content="使用 AI 自动生成准确的视频字幕。支持多种语言和格式。">
+    <meta name="twitter:title" content="AutoSRT - AI 双语字幕生成器">
+    <meta name="twitter:description" content="使用 AI 即时创建双语字幕。免费的 Mac 双语字幕工具。#AutoSRT #AI字幕 #双语字幕">
     <meta name="twitter:image" content="https://yyaadet.github.io/autosrt_page/images/autosrt-preview.png">
 
     <!-- JSON-LD Structured Data -->
@@ -50,15 +50,14 @@
         }
 
         :root {
-            --bg-primary: #fff;
-            --bg-secondary: #f8f1f1;
-            --text-primary: #2c3e50;
-            --text-secondary: #34495e;
-            --accent-primary: #c41e3a;  /* 圣诞红 */
-            --accent-secondary: #165b33;  /* 圣诞绿 */
-            --card-bg: #ffffff;
-            --card-border: rgba(22, 91, 51, 0.1);  /* 浅圣诞绿 */
-            --button-hover: #d4213f;
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --accent-primary: #4a9eff;
+            --accent-secondary: #2d5a8e;
+            --card-bg: #333333;
+            --card-border: #404040;
         }
 
         body {
@@ -174,7 +173,7 @@
         }
 
         .github-button:hover {
-            background-color: var(--button-hover);
+            background-color: var(--accent-secondary);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(196, 30, 58, 0.2);
         }
@@ -223,7 +222,7 @@
             padding: 2rem;
             margin: 2rem 0;
             box-shadow: 0 4px 12px var(--card-border);
-            border: 2px solid var(--accent-primary);
+            border: 1px solid var(--accent-primary);
             position: relative;
         }
 
@@ -519,6 +518,87 @@
             transform: translateY(-2px);
         }
 
+        .blog-section {
+            padding: 4rem 0;
+            background-color: var(--bg-secondary);
+        }
+
+        .blog-section h2 {
+            text-align: center;
+            color: var(--accent-primary);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .blog-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .blog-card h3 {
+            color: var(--accent-primary);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-excerpt {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .read-more {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: var(--accent-secondary);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--accent-primary);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--accent-secondary);
+        }
+
+        .cta-button:hover {
+            background-color: var(--accent-secondary);
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 1rem;
@@ -558,6 +638,11 @@
         </header>
         
         <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>双语字幕生成</h3>
+                <p>同时生成两种语言的字幕。完美适用于语言学习和国际化内容。轻松创建双语视频。</p>
+            </div>
             <div class="feature-card">
                 <div class="feature-icon">🔒</div>
                 <h3>100% 私密 & 原生</h3>
@@ -599,35 +684,20 @@
                 <p>智能字幕翻译，考虑整个对话的上下文，确保更准确和自然的翻译。</p>
             </div>
         </div>
-        <div class="hot-news">
-            <div class="hot-news-header">
-                <span class="hot-news-badge">新版本</span>
-                <div class="hot-news-title">7.1.0 版本发布！🎉</div>
-            </div>
-            <div class="hot-news-content">
-                <p>我们很高兴地宣布 AutoSRT v7.1.0 带来了新的改进：</p>
-                <ul style="list-style: none; padding: 0; margin: 1rem 0;">
-                    <li style="margin: 0.5rem 0;">🎯 修复字幕对齐问题</li>
-                    <li style="margin: 0.5rem 0;">🌏 新增泰语支持</li>
-                    <li style="margin: 0.5rem 0;">✨ 改进视频中的字幕效果</li>
-                </ul>
-                <p>立即更新体验这些新功能！</p>
-            </div>
-        </div>
 
         <div class="hot-news">
             <div class="hot-news-header">
                 <span class="hot-news-badge">新版本</span>
-                <div class="hot-news-title">5.0.0 版本发布！🎉</div>
+                <div class="hot-news-title">8.0.0 版本发布！🎉</div>
             </div>
             <div class="hot-news-content">
-                <p>我们很高兴地宣布 AutoSRT v5.0.0，带来了重大改进和新功能：</p>
+                <p>我们很高兴地宣布 AutoSRT v8.0.0 带来了重大更新：</p>
                 <ul style="list-style: none; padding: 0; margin: 1rem 0;">
-                    <li style="margin: 0.5rem 0;">🔍 批量替换字幕</li>
-                    <li style="margin: 0.5rem 0;">💡 更准确的字幕翻译</li>
-                    <li style="margin: 0.5rem 0;">🤖 更大更智能的字幕翻译模型</li>
+                    <li style="margin: 0.5rem 0;">🎯 支持多种 LLM 模型（LLaMA 3、Qwen 等）</li>
+                    <li style="margin: 0.5rem 0;">🎨 灵活的视频渲染选项</li>
+                    <li style="margin: 0.5rem 0;">✨ 高级字幕编辑器</li>
                 </ul>
-                <p>立即下载，体验最强大的视频字幕生成工具！</p>
+                <p>立即更新体验这些令人兴奋的新功能！</p>
             </div>
         </div>
 
@@ -724,8 +794,37 @@ sudo xattr -rd com.apple.quarantine /Applications/AutoSRT.app</pre>
             </p>
         </section>
 
+        <section class="blog-section">
+            <h2>最新博客文章</h2>
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <h3>如何使用 AI 自动为视频添加字幕</h3>
+                    <div class="blog-meta">2023年12月23日 • 阅读时间 6 分钟</div>
+                    <p class="blog-excerpt">学习如何使用 AutoSRT 自动为视频生成和添加字幕。按照我们的详细步骤指南，轻松创建专业字幕。</p>
+                    <a href="how-to-add-subtitles-automatically.html" class="read-more">阅读更多 →</a>
+                </article>
+
+                <article class="blog-card">
+                    <h3>AI 转录工具</h3>
+                    <div class="blog-meta">2023年12月23日 • 阅读时间 4 分钟</div>
+                    <p class="blog-excerpt">探索 AI 驱动的转录工具如何以前所未有的准确性和效率革新语音转文字。了解 AutoSRT 的先进功能和隐私优先方法。</p>
+                    <a href="ai-transcription-tool.html" class="read-more">阅读更多 →</a>
+                </article>
+
+                <article class="blog-card">
+                    <h3>自动字幕生成器</h3>
+                    <div class="blog-meta">2023年12月23日 • 阅读时间 5 分钟</div>
+                    <p class="blog-excerpt">了解自动字幕生成如何改变视频内容创作。探索 AI 驱动字幕的优势以及 AutoSRT 如何使其变得简单易用。</p>
+                    <a href="automatic-subtitle-generator.html" class="read-more">阅读更多 →</a>
+                </article>
+            </div>
+            <div style="text-align: center;">
+                <a href="blog.html" class="cta-button view-all-posts">查看所有文章</a>
+            </div>
+        </section>
+
         <footer>
-            <p>特别感谢 <a href="https://www.51zhi.com/" target="_blank" rel="noopener noreferrer">Slot Finder</a> 的支持。</p>
+            <p>特别感谢 <a href="https://www.51zhi.com/" target="_blank" rel="noopener noreferrer">有空吗</a> 的支持。</p>
             <p> 2024 AutoSRT. 保留所有权利。</p>
         </footer>
     </div>

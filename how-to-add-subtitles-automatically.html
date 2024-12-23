@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Add Subtitles to Videos Automatically by AI - AutoSRT Tutorial</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Step-by-step guide on how to automatically add subtitles to your videos using AutoSRT's AI-powered technology. Learn the easiest way to create professional subtitles.">
+    <meta name="keywords" content="AutoSRT tutorial, automatic subtitles, AI subtitles, video subtitling guide">
+    <meta name="author" content="AutoSRT Team">
+    
+    <style>
+        :root {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --accent-primary: #4a9eff;
+            --accent-secondary: #2d5a8e;
+            --card-bg: #333333;
+            --card-border: #404040;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+        }
+
+        .nav {
+            margin-bottom: 2rem;
+        }
+
+        .nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: var(--accent-primary);
+        }
+
+        .blog-post {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .blog-title {
+            font-size: 2rem;
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+        }
+
+        .blog-meta {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .blog-content {
+            margin-bottom: 2rem;
+        }
+
+        .blog-content h2 {
+            color: var(--accent-primary);
+            margin: 2rem 0 1rem;
+        }
+
+        .blog-content p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .blog-content ul, .blog-content ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .blog-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background-color: var(--accent-primary);
+            color: var(--text-primary);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            margin-right: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .note {
+            background-color: var(--bg-secondary);
+            border-left: 4px solid var(--accent-primary);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--accent-primary);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--accent-secondary);
+        }
+
+        .cta-button:hover {
+            background-color: var(--accent-secondary);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--card-border);
+            color: var(--text-secondary);
+        }
+
+        .image-container {
+            background-color: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">AutoSRT</div>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="blog.html">Blog</a>
+                <a href="https://github.com/yyaadet/autosrt_page">GitHub</a>
+            </nav>
+        </header>
+
+        <article class="blog-post">
+            <h1 class="blog-title">How to Add Subtitles to Videos Automatically by AI</h1>
+            <div class="blog-meta">Published on December 23, 2023 • 6 min read</div>
+            
+            <div class="blog-content">
+                <p>Adding subtitles to your videos has never been easier with AI-powered tools like AutoSRT. In this step-by-step guide, we'll walk you through the process of automatically generating and adding subtitles to your videos using AutoSRT.</p>
+
+                <h2>Prerequisites</h2>
+                <ul>
+                    <li>A Mac computer</li>
+                    <li>AutoSRT installed on your system</li>
+                    <li>Your video file ready for subtitling</li>
+                </ul>
+
+                <div class="note">
+                    <p><strong>Note:</strong> AutoSRT processes everything locally on your computer, ensuring your video content remains private and secure.</p>
+                </div>
+
+                <h2>Step-by-Step Guide</h2>
+                
+                <h3>1. Prepare Your Video</h3>
+                <p>Before starting, ensure your video file is in a compatible format (MP4, MOV, AVI, etc.). For best results, make sure your video has clear audio quality.</p>
+
+                <h3>2. Launch AutoSRT</h3>
+                <ol>
+                    <li>Open AutoSRT on your Mac</li>
+                    <li>If this is your first time, you might need to grant necessary permissions</li>
+                    <li>You'll see the main interface with a drag-and-drop area</li>
+                </ol>
+
+                <h3>3. Import Your Video</h3>
+                <p>There are two ways to import your video:</p>
+                <ul>
+                    <li>Drag and drop your video file into the application window</li>
+                    <li>Click the "Open Video" button and select your file</li>
+                </ul>
+
+                <h3>4. Configure Subtitle Settings</h3>
+                <p>Before generating subtitles, you can customize various settings:</p>
+                <ul>
+                    <li>Select your preferred AI model (LLaMA 3, Qwen, etc.)</li>
+                    <li>Choose the source language of the video</li>
+                    <li>Set the target language for translation (if needed)</li>
+                    <li>Adjust font settings (size, style, color)</li>
+                    <li>Configure subtitle position and timing</li>
+                </ul>
+
+                <h3>5. Generate Subtitles</h3>
+                <ol>
+                    <li>Click the "Generate Subtitles" button</li>
+                    <li>Wait while AutoSRT processes your video</li>
+                    <li>The AI will analyze the audio and create subtitles automatically</li>
+                </ol>
+
+                <h3>6. Edit and Refine</h3>
+                <p>After generation, you can:</p>
+                <ul>
+                    <li>Preview the subtitles with your video</li>
+                    <li>Edit text using the built-in editor</li>
+                    <li>Adjust timing using keyboard shortcuts (Command+C/V)</li>
+                    <li>Fine-tune subtitle appearance</li>
+                </ul>
+
+                <h3>7. Export Your Video</h3>
+                <p>Once you're satisfied with the subtitles:</p>
+                <ol>
+                    <li>Click the "Export" button</li>
+                    <li>Choose your preferred export format</li>
+                    <li>Select the output location</li>
+                    <li>Wait for the export to complete</li>
+                </ol>
+
+                <h2>Pro Tips</h2>
+                <ul>
+                    <li>Use keyboard shortcuts for faster editing</li>
+                    <li>Save your subtitle style preferences for future use</li>
+                    <li>Enable auto-save to prevent losing your progress</li>
+                    <li>Use batch processing for multiple videos</li>
+                </ul>
+
+                <div class="note">
+                    <p><strong>Tip:</strong> For longer videos, you can use the document alignment feature to match subtitles with existing scripts or transcripts.</p>
+                </div>
+
+                <h2>Troubleshooting</h2>
+                <p>If you encounter any issues:</p>
+                <ul>
+                    <li>Ensure your video has clear audio quality</li>
+                    <li>Check if you have enough disk space</li>
+                    <li>Verify that your Mac meets the system requirements</li>
+                    <li>Try restarting the application if it becomes unresponsive</li>
+                </ul>
+
+                <h2>Ready to Get Started?</h2>
+                <p>Download AutoSRT now and start creating professional subtitles for your videos in minutes. It's free, secure, and incredibly easy to use.</p>
+
+                <a href="https://github.com/yyaadet/autosrt_page/releases/" class="cta-button">Download AutoSRT</a>
+            </div>
+        </article>
+
+        <footer>
+            <p>© 2023 AutoSRT. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

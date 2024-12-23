@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoSRT - Automatic Subtitle Generation | AI-Powered Video Subtitling Tool</title>
+    <title>AutoSRT - AI Dual Language Subtitle Generator | Free Mac App</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="AutoSRT is a powerful AI-powered tool for automatic subtitle generation. Convert speech to text, generate subtitles in multiple languages, and enhance your video content with accurate subtitles.">
-    <meta name="keywords" content="AutoSRT, subtitle generation, automatic subtitles, video subtitles, AI subtitles, speech to text, video translation">
+    <meta name="description" content="AutoSRT: Free AI-powered dual language subtitle generator for Mac. Create bilingual subtitles instantly, 100% offline. Perfect for language learning, content creators, and international videos. #AutoSRT #AISubtitles #DualLanguage #MacApp">
+    <meta name="keywords" content="AutoSRT, dual language subtitles, AI subtitle generator, video subtitles, bilingual subtitles, offline subtitle generator, Mac app, language learning, content creation, video translation, automatic subtitles, free subtitle tool">
     <meta name="author" content="AutoSRT Team">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://yyaadet.github.io/autosrt_page/" />
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="AutoSRT - Automatic Subtitle Generation | AI-Powered Video Subtitling Tool">
-    <meta property="og:description" content="Generate accurate video subtitles automatically using AI. Support for multiple languages and formats.">
+    <meta property="og:title" content="AutoSRT - AI Dual Language Subtitle Generator">
+    <meta property="og:description" content="Generate bilingual subtitles instantly with AI. 100% offline and free for Mac. Perfect for language learning and content creation. #AutoSRT #AISubtitles">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yyaadet.github.io/autosrt_page/">
     <meta property="og:image" content="https://yyaadet.github.io/autosrt_page/images/autosrt-preview.png">
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="AutoSRT - Automatic Subtitle Generation | AI-Powered Video Subtitling Tool">
-    <meta name="twitter:description" content="Generate accurate video subtitles automatically using AI. Support for multiple languages and formats.">
+    <meta name="twitter:title" content="AutoSRT - AI Dual Language Subtitle Generator">
+    <meta name="twitter:description" content="Create bilingual subtitles instantly with AI. Free Mac app for dual language subtitles. #AutoSRT #AISubtitles #DualLanguage">
     <meta name="twitter:image" content="https://yyaadet.github.io/autosrt_page/images/autosrt-preview.png">
 
     <!-- JSON-LD Structured Data -->
@@ -103,15 +103,17 @@
         .star:nth-child(5) { top: 35%; left: 90%; animation-delay: 1.2s; }
 
         :root {
-            --bg-primary: #fff;
-            --bg-secondary: #f8f1f1;
-            --text-primary: #2c3e50;
-            --text-secondary: #34495e;
-            --accent-primary: #c41e3a;  /* Christmas red */
-            --accent-secondary: #165b33;  /* Christmas green */
-            --card-bg: #ffffff;
-            --card-border: rgba(22, 91, 51, 0.1);  /* Light Christmas green */
-            --button-hover: #d4213f;
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --accent-primary: #4a9eff;
+            --accent-secondary: #2d5a8e;
+            --card-bg: #333333;
+            --card-border: #404040;
+            --success: #2ecc71;
+            --warning: #f1c40f;
+            --error: #e74c3c;
         }
 
         body {
@@ -219,17 +221,16 @@
             display: inline-block;
             padding: 0.8rem 1.5rem;
             background-color: var(--accent-primary);
-            color: white;
+            color: var(--text-primary);
             text-decoration: none;
             border-radius: 8px;
+            margin: 0.5rem;
             transition: all 0.3s ease;
-            border: 2px solid transparent;
+            border: 1px solid var(--accent-secondary);
         }
 
         .github-button:hover {
-            background-color: var(--button-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(196, 30, 58, 0.2);
+            background-color: var(--accent-secondary);
         }
 
         .features {
@@ -276,7 +277,7 @@
             padding: 2rem;
             margin: 2rem 0;
             box-shadow: 0 4px 12px var(--card-border);
-            border: 1px solid var(--accent-primary);
+            border: 1px solid var(--card-border);
             position: relative;
         }
 
@@ -299,7 +300,7 @@
 
         .hot-news-badge {
             background-color: var(--accent-primary);
-            color: white;
+            color: var(--text-primary);
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
             font-size: 0.9rem;
@@ -309,7 +310,7 @@
         .hot-news-title {
             font-size: 1.5rem;
             font-weight: bold;
-            color: var(--accent-primary);
+            color: var(--text-primary);
         }
 
         .screenshots {
@@ -568,8 +569,94 @@
         }
 
         .language-button:hover {
+            background-color: var(--accent-primary);
+        }
+
+        .blog-section {
+            padding: 4rem 0;
             background-color: var(--bg-secondary);
-            transform: translateY(-2px);
+        }
+
+        .blog-section h2 {
+            text-align: center;
+            color: var(--accent-primary);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .blog-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .blog-card h3 {
+            color: var(--accent-primary);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-excerpt {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .read-more {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: var(--accent-secondary);
+        }
+
+        .view-all-posts {
+            display: block;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--accent-primary);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--accent-secondary);
+        }
+
+        .cta-button:hover {
+            background-color: var(--accent-secondary);
         }
 
         @media (max-width: 768px) {
@@ -598,6 +685,7 @@
 </head>
 <body>
     <div class="language-switch">
+        <a href="blog.html" class="language-button" style="margin-right: 1rem;">Blog</a>
         <a href="index_zh.html" class="language-button">中文</a>
     </div>
     <div class="container">
@@ -611,12 +699,17 @@
             </div>
             <div class="santa-sleigh"></div>
             <div class="logo">AutoSRT</div>
-            <p class="subtitle">Transform your videos with automatic subtitle generation powered by advanced AI - 100% offline, ensuring complete privacy. Available for macOS.</p>
+            <p class="subtitle">Save hours with instant AI dual language subtitle generation. 100% offline and native on your Mac for complete privacy. Free forever.</p>
             <a href="https://github.com/yyaadet/autosrt_page/releases/" class="github-button">Download for macOS</a>
             <a href="https://github.com/yyaadet/autosrt_page" class="github-button">View on GitHub</a>
         </header>
         
         <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>Dual Language Subtitles</h3>
+                <p>Generate subtitles in two languages simultaneously. Perfect for language learning and international content. Create bilingual videos effortlessly.</p>
+            </div>
             <div class="feature-card">
                 <div class="feature-icon">🔒</div>
                 <h3>100% Private & Native</h3>
@@ -625,7 +718,7 @@
             <div class="feature-card">
                 <div class="feature-icon">🌍</div>
                 <h3>Rich Language Support</h3>
-                <p>Generate subtitles in multiple languages: Chinese, English, Japanese, Korean, Spanish, Arabic, French, Portuguese, German, Russian, Italian, Thai.</p>
+                <p>Generate subtitles in multiple languages: Chinese, English, Japanese, Korean, Spanish, Arabic, French, Portuguese, German, Russian, Italian, Thai, Finnish.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">💝</div>
@@ -640,17 +733,17 @@
             <div class="feature-card">
                 <div class="feature-icon">📝</div>
                 <h3>Advanced Subtitle Editor</h3>
-                <p>Edit, search, and batch replace subtitles with ease. Make your subtitles perfect in no time.</p>
+                <p>Powerful editing tools to perfect your subtitles: search, batch replace, and align with local documents. Edit with precision and efficiency.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">🤖</div>
                 <h3>Flexible Model Support</h3>
-                <p>Switch between different LLM models like llama, whisper, and more easily. Get the best model for your subtitles.</p>
+                <p>Switch between different LLM models like LLaMA 3, Qwen, and more easily. Get the best model for your subtitles.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🔤</div>
-                <h3>Customizable Font Size</h3>
-                <p>Choose from small, medium, or large font sizes to match your viewing preferences and ensure comfortable subtitle reading.</p>
+                <div class="feature-icon">🎨</div>
+                <h3>Flexible Video Rendering</h3>
+                <p>Customize your subtitles exactly how you want them: adjust font size, choose font styles, set colors, and modify border styles for perfect video presentation.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">🔄</div>
@@ -661,14 +754,16 @@
         <div class="hot-news">
             <div class="hot-news-header">
                 <span class="hot-news-badge">NEW</span>
-                <div class="hot-news-title">Version 7.1.0 Released! 🎉</div>
+                <div class="hot-news-title">Version 8.0.0 Released! 🎉</div>
             </div>
             <div class="hot-news-content">
-                <p>We're excited to announce AutoSRT v7.1.0 with new improvements:</p>
+                <p>We're excited to announce AutoSRT v8.0.0 with new improvements:</p>
                 <ul style="list-style: none; padding: 0; margin: 1rem 0;">
-                    <li style="margin: 0.5rem 0;">🎯 Fixed subtitle alignment issues</li>
-                    <li style="margin: 0.5rem 0;">🌏 Added support for Thai language</li>
-                    <li style="margin: 0.5rem 0;">✨ Improved subtitle effects in videos</li>
+                    <li style="margin: 0.5rem 0;">⚡️ Faster Settings window loading</li>
+                    <li style="margin: 0.5rem 0;">🔧 Fixed subtitle editing and auto-update issues</li>
+                    <li style="margin: 0.5rem 0;">⌨️ Added Command+C/V support in subtitle editor</li>
+                    <li style="margin: 0.5rem 0;">💾 Auto-save for subtitles, edits, and video URLs</li>
+                    <li style="margin: 0.5rem 0;">🌏 Added support for Finnish language</li>
                 </ul>
                 <p>Update now to experience these enhancements!</p>
             </div>
@@ -685,6 +780,7 @@
                     <li style="margin: 0.5rem 0;">Open Terminal (press Command+Space and search for Terminal)</li>
                     <li style="margin: 0.5rem 0;">Run these commands:
                         <pre style="background: var(--card-bg); padding: 1rem; border-radius: 8px; margin: 0.5rem 0; overflow-x: auto;">
+sudo spctl --master-disable
 cd /Applications
 sudo xattr -rd com.apple.quarantine /Applications/AutoSRT.app</pre>
                     </li>
@@ -756,6 +852,35 @@ sudo xattr -rd com.apple.quarantine /Applications/AutoSRT.app</pre>
                     <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                     LinkedIn
                 </a>
+            </div>
+        </section>
+
+        <section class="blog-section">
+            <h2>Latest from Our Blog</h2>
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <h3>How to Add Subtitles to Videos Automatically by AI</h3>
+                    <div class="blog-meta">December 23, 2023 • 6 min read</div>
+                    <p class="blog-excerpt">Learn how to automatically generate and add subtitles to your videos using AutoSRT. Follow our comprehensive step-by-step guide to create professional subtitles effortlessly.</p>
+                    <a href="how-to-add-subtitles-automatically.html" class="read-more">Read More →</a>
+                </article>
+
+                <article class="blog-card">
+                    <h3>AI Transcription Tool</h3>
+                    <div class="blog-meta">December 23, 2023 • 4 min read</div>
+                    <p class="blog-excerpt">Discover how AI-powered transcription tools are revolutionizing speech-to-text conversion with unprecedented accuracy and efficiency.</p>
+                    <a href="ai-transcription-tool.html" class="read-more">Read More →</a>
+                </article>
+
+                <article class="blog-card">
+                    <h3>Automatic Subtitle Generator</h3>
+                    <div class="blog-meta">December 23, 2023 • 5 min read</div>
+                    <p class="blog-excerpt">Learn how automatic subtitle generation is transforming video content creation. Explore the benefits of AI-powered subtitling.</p>
+                    <a href="automatic-subtitle-generator.html" class="read-more">Read More →</a>
+                </article>
+            </div>
+            <div style="text-align: center;">
+                <a href="blog.html" class="cta-button view-all-posts">View All Posts</a>
             </div>
         </section>
 

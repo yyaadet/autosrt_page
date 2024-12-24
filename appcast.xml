@@ -3,6 +3,16 @@
     <channel>
         <title>AutoSRT</title>
         <item>
+            <title>8.1.0</title>
+            <pubDate>Tue, 24 Dec 2024 10:59:27 +0800</pubDate>
+            <sparkle:version>450</sparkle:version>
+            <sparkle:shortVersionString>8.1.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/yyaadet/autosrt_page/releases/download/v8.1.0/AutoSRT-v8.1.0.dmg" length="1351040957" type="application/octet-stream"/>
+            <sparkle:releaseNotesLink>https://github.com/yyaadet/autosrt_page/releases/tag/v8.1.0</sparkle:releaseNotesLink>
+        </item>
+
+        <item>
             <title>8.0.0</title>
             <pubDate>Sun, 22 Dec 2024 13:41:20 +0800</pubDate>
             <sparkle:version>420</sparkle:version>

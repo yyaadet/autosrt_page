@@ -4,13 +4,15 @@ AutoSRT is a powerful desktop application that automatically generates English a
 
 ## Features
 
-- 🔒 **100% Local Processing**: All operations run offline on your machine, ensuring complete privacy
-- 🎯 **High-Quality Subtitles**: Automatically generates accurate English and Chinese subtitles
-- 💾 **Flexible Export Options**: Export subtitles to SRT format or directly embed them into videos
-- 🎥 **Video Quality Control**: Support for various quality settings (1080p, 720p, low, medium, high)
-- ⚡ **Fast Processing**: 4x faster rendering compared to previous versions
-- 🔐 **Data Security**: Your videos never leave your computer, guaranteeing complete privacy
-
+- 🌐 **Dual Language Subtitles**: Generate subtitles in two languages simultaneously - perfect for language learning and international content
+- 🔒 **100% Private & Native**: Runs completely offline on your machine - no internet needed, your videos never leave your computer
+- 🌍 **Rich Language Support**: Generate subtitles in multiple languages including Chinese, English, Japanese, Korean, Spanish, Arabic, French, Portuguese, German, Russian, Italian, Thai, Finnish
+- 💝 **Free Forever**: All features are completely free - no hidden costs, no subscriptions, no limits
+- ⚡ **Fast Local Processing**: Get your subtitles quickly with native processing power, no uploading or waiting for servers
+- 📝 **Advanced Subtitle Editor**: Powerful editing tools to perfect your subtitles with search, batch replace, and align with local documents
+- 🤖 **Flexible Model Support**: Switch between different LLM models like LLaMA 3, Qwen, and more easily
+- 🎨 **Flexible Video Rendering**: Customize subtitles with adjustable font size, styles, colors, and border styles
+- 🔄 **Context-Aware Translation**: Smart subtitle translation that considers the context of the entire conversation
 
 ## Latest Release
 

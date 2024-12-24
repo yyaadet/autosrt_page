@@ -14,25 +14,6 @@ AutoSRT 是一款功能强大的桌面应用程序，可以自动从视频文件
 - 🎨 **灵活的视频渲染**：自定义字幕样式，包括字体大小、样式、颜色和边框样式
 - 🔄 **上下文感知翻译**：智能字幕翻译，考虑整个对话的上下文，确保更准确自然的翻译
 
-## 发布版本
-
-### v7.1.0 (2024-12-18)
-
-- 修复字幕对齐问题
-- 支持泰语翻译
-- 改进视频中的字幕效果
-
-### v3.0.2
-
-- 添加应用签名，修复 macOS 安全警告
-
-### v2.0.0
-
-- 字幕翻译准确度更高
-- 字幕渲染速度提升，大约快4倍
-- 视频文件体积更小，约为原来的1/10
-- 更多进度条显示
-
 ## 截图展示
 
 ![首页](https://github.com/yyaadet/autosrt_page/blob/main/screenshots/home.png)
@@ -68,4 +49,4 @@ sudo xattr -rd com.apple.quarantine /Applications/AutoSRT.app
 
 ## 致谢
 
-- [Slot Finder](https://www.51zhi.com/)
+- [有空吗](https://www.51zhi.com/)

@@ -14,14 +14,6 @@ AutoSRT is a powerful desktop application that automatically generates English a
 - 🎨 **Flexible Video Rendering**: Customize subtitles with adjustable font size, styles, colors, and border styles
 - 🔄 **Context-Aware Translation**: Smart subtitle translation that considers the context of the entire conversation
 
-## Latest Release
-
-### v7.1.0 (2024-12-18)
-
-- Fix subtitle alignment bug
-- Support Thai translation
-- Improve subtitle effect in the video
-
 ## Screenshots
 
 ![Home](https://github.com/yyaadet/autosrt_page/blob/main/screenshots/home.png)

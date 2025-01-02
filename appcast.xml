@@ -3,6 +3,16 @@
     <channel>
         <title>AutoSRT</title>
         <item>
+            <title>9.2.0</title>
+            <pubDate>Thu, 02 Jan 2025 10:43:12 +0800</pubDate>
+            <sparkle:version>600</sparkle:version>
+            <sparkle:shortVersionString>9.2.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/yyaadet/autosrt_page/releases/download/v9.2.0/AutoSRT-v9.2.0.dmg" length="1351174500" type="application/octet-stream"/>
+            <sparkle:releaseNotesLink>https://github.com/yyaadet/autosrt_page/releases/tag/v9.2.0</sparkle:releaseNotesLink>
+        </item>
+
+        <item>
             <title>9.0.0</title>
             <pubDate>Sun, 29 Dec 2024 14:44:05 +0800</pubDate>
             <sparkle:version>500</sparkle:version>

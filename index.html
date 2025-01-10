@@ -218,18 +218,47 @@
         }
 
         .github-button {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            height: 36px;
             background-color: var(--accent-primary);
             color: var(--text-primary);
             text-decoration: none;
             border-radius: 8px;
-            margin: 0.5rem;
             transition: all 0.3s ease;
             border: 1px solid var(--accent-secondary);
+            font-size: 14px;
+            line-height: 1;
         }
 
-        .github-button:hover {
+        .language-switch {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .language-button, .github-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            height: 36px;
+            background-color: var(--accent-primary);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--accent-secondary);
+            font-size: 14px;
+            line-height: 1;
+        }
+
+        .language-button:hover, .github-button:hover {
             background-color: var(--accent-secondary);
         }
 
@@ -531,28 +560,6 @@
             fill: currentColor;
         }
 
-        .language-switch {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-
-        .language-button {
-            background-color: var(--card-bg);
-            color: var(--text-primary);
-            border: 1px solid var(--card-border);
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        .language-button:hover {
-            background-color: var(--accent-primary);
-        }
-
         .blog-section {
             padding: 4rem 0;
             background-color: var(--bg-secondary);
@@ -655,20 +662,29 @@
         }
     </style>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7QWWZQR1EH"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7QWWZQR1EH"></script>
+    <!-- GitHub Buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-7QWWZQR1EH');
-</script>
+      gtag('config', 'G-7QWWZQR1EH');
+    </script>
 </head>
 <body>
     <div class="language-switch">
-        <a href="blog.html" class="language-button" style="margin-right: 1rem;">Blog</a>
+        <a href="blog.html" class="language-button">Blog</a>
         <a href="https://github.com/yyaadet/autosrt_page" class="language-button">GitHub</a>
         <a href="index_zh.html" class="language-button">中文</a>
+        <!-- GitHub Star Button -->
+        <a class="github-button" 
+           href="https://github.com/yyaadet/autosrt_page" 
+           data-icon="octicon-star" 
+           data-size="large" 
+           data-show-count="true" 
+           aria-label="Star yyaadet/autosrt_page on GitHub">Star</a>
     </div>
     <div class="container">
         <header>

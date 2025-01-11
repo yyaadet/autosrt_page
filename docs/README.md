@@ -50,4 +50,5 @@ Done!
 
 ## Thanks
 
-- [Slot Finder](https://www.51zhi.com/)
+- [Slot Finder: Find your ideal time to study or meeting](https://www.51zhi.com/)
+- [AIClips: Find your interesting clips from video with AI-powered intelligence](https://yyaadet.github.io/aiclips/)

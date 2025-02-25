@@ -52,5 +52,7 @@ Done!
 
 - [Slot Finder: Find your ideal time to study or meeting](https://www.51zhi.com/)
 - [AIClips: Find your interesting clips from video with AI-powered intelligence](https://yyaadet.github.io/aiclips/)
+
 - [LLMSurf - AI Agent For macOS](https://github.com/yyaadet/llmsurf) 
+
 ![LLMSurf](https://raw.githubusercontent.com/yyaadet/llmsurf/main/images/logo.png)

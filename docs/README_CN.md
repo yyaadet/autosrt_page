@@ -1,6 +1,6 @@
 # AutoSRT
 
-AutoSRT 是一款功能强大的桌面应用程序，可以自动从视频文件生成英文和中文字幕。所有处理完全在本地计算机上进行，确保了数据隐私和安全性的同时，还能提供专业质量的字幕。
+AutoSRT 是一款功能强大的桌面应用程序，可以自动从视频文件生成双语字幕。所有处理完全在本地计算机上进行，确保了数据隐私和安全性的同时，还能提供专业质量的字幕。
 
 ## 功能特点
 
@@ -10,7 +10,7 @@ AutoSRT 是一款功能强大的桌面应用程序，可以自动从视频文件
 - 💝 **永久免费**：所有功能完全免费 - 无隐藏费用，无订阅，无限制
 - ⚡ **快速本地处理**：利用本地处理能力快速生成字幕，无需上传等待服务器
 - 📝 **高级字幕编辑器**：强大的编辑工具，支持搜索、批量替换和本地文档对齐
-- 🤖 **灵活的模型支持**：轻松切换不同的 LLM 模型，如 LLaMA 3、Qwen 等
+- 🤖 **灵活的模型支持**：轻松切换不同的 LLM 模型，如 LLaMA 3、Qwen、Deepseek、QwQ 等。支持 ollama 和 OpenAI API 格式。
 - 🎨 **灵活的视频渲染**：自定义字幕样式，包括字体大小、样式、颜色和边框样式
 - 🔄 **上下文感知翻译**：智能字幕翻译，考虑整个对话的上下文，确保更准确自然的翻译
 
@@ -46,6 +46,14 @@ sudo xattr -rd com.apple.quarantine /Applications/AutoSRT.app
 3. 输入您的用户密码
 
 完成！
+
+## 推荐应用
+
+- [Slot Finder: 找到您理想的学习或会议时间](https://www.51zhi.com/)
+- [AIClips: 使用 AI 智能从视频中找到您感兴趣的片段](https://yyaadet.github.io/aiclips/)
+- [LLMSurf - macOS 上的 AI 助手](https://github.com/yyaadet/llmsurf)
+
+![LLMSurf](https://raw.githubusercontent.com/yyaadet/llmsurf/main/images/logo.png)
 
 ## 致谢
 

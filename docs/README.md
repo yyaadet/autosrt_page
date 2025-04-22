@@ -1,6 +1,6 @@
 # AutoSRT
 
-AutoSRT is a powerful desktop application that automatically generates English and Chinese subtitles from video files. Running entirely offline on your local machine, it ensures complete privacy and data security while delivering professional-quality subtitles.
+AutoSRT is a powerful desktop application that automatically generates dual language subtitles from video files. Running entirely offline on your local machine, it ensures complete privacy and data security while delivering professional-quality subtitles.
 
 ## Features
 
@@ -10,7 +10,7 @@ AutoSRT is a powerful desktop application that automatically generates English a
 - 💝 **Free Forever**: All features are completely free - no hidden costs, no subscriptions, no limits
 - ⚡ **Fast Local Processing**: Get your subtitles quickly with native processing power, no uploading or waiting for servers
 - 📝 **Advanced Subtitle Editor**: Powerful editing tools to perfect your subtitles with search, batch replace, and align with local documents
-- 🤖 **Flexible Model Support**: Switch between different LLM models like LLaMA 3, Qwen, and more easily
+- 🤖 **Flexible Model Support**: Switch between different LLM models like LLaMA 3, Qwen, Deepseek, QwQ and more easily. Support ollama and OpenAI api format.
 - 🎨 **Flexible Video Rendering**: Customize subtitles with adjustable font size, styles, colors, and border styles
 - 🔄 **Context-Aware Translation**: Smart subtitle translation that considers the context of the entire conversation
 
@@ -52,7 +52,6 @@ Done!
 
 - [Slot Finder: Find your ideal time to study or meeting](https://www.51zhi.com/)
 - [AIClips: Find your interesting clips from video with AI-powered intelligence](https://yyaadet.github.io/aiclips/)
-
 - [LLMSurf - AI Agent For macOS](https://github.com/yyaadet/llmsurf) 
 
 ![LLMSurf](https://raw.githubusercontent.com/yyaadet/llmsurf/main/images/logo.png)

@@ -46,6 +46,14 @@ sudo xattr -rd com.apple.quarantine /Applications/AutoSRT.app
 ```
 3. Enter your user password
 
+---
+
+### How to do if failed to download audio model?
+
+1. Download model from [ggml-large-v3-turbo](https://github.com/yyaadet/autosrt_page/releases/download/v10.0.0/ggml-large-v3-turbo.bin.zip)
+2. Unzip the model and place the bin file to the directory `~/Library/Application Support/AutoSRT/Models/ggml-large-v3-turbo/`
+3. Restart AutoSRT
+
 Done!
 
 ## App Recommendations 

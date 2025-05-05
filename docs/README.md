@@ -51,10 +51,16 @@ sudo xattr -rd com.apple.quarantine /Applications/AutoSRT.app
 ### How to do if failed to download audio model?
 
 1. Download model from [ggml-large-v3-turbo](https://github.com/yyaadet/autosrt_page/releases/download/v10.0.0/ggml-large-v3-turbo.bin.zip)
-2. Unzip the model and place the bin file to the directory `~/Library/Application Support/AutoSRT/Models/ggml-large-v3-turbo/`
+2. Unzip the model and place the bin file to the directory `/Users/{your username}/Library/Application Support/AutoSRT/Models/ggml-large-v3-turbo/`
 3. Restart AutoSRT
 
 Done!
+
+### LLM benchmark for translation
+
+- Best: mistral-small3.1:24B
+
+We found if the LLM model has more parameters, more accuracy. The gemma3:4B is obviously better than gemma3:1B. The mistra-small3.1:24B is best than any other LLM models. It can reach at least 90% translation ratio in the most time.
 
 ## App Recommendations 
 

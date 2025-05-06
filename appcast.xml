@@ -3,16 +3,16 @@
     <channel>
         <title>AutoSRT</title>
         <item>
-            <title>10.0.0</title>
-            <pubDate>Tue, 22 Apr 2025 13:21:03 +0800</pubDate>
+            <title>v10.4.0</title>
+            <pubDate>Tue, 6 May 2025 13:21:03 +0800</pubDate>
             <sparkle:version>1000</sparkle:version>
-            <sparkle:shortVersionString>10.0.0</sparkle:shortVersionString>
+            <sparkle:shortVersionString>10.4.0</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
             <enclosure
-                url="https://github.com/yyaadet/autosrt_page/releases/download/v10.0.0/AutoSRT-10.0.0-1000.dmg
+                url="https://github.com/yyaadet/autosrt_page/releases/download/v10.4.0/AutoSRT-10.4.0-1400.dmg
 "
-                length="40955064" type="application/octet-stream" />
-            <sparkle:releaseNotesLink>https://github.com/yyaadet/autosrt_page/releases/tag/v10.0.0</sparkle:releaseNotesLink>
+                length="40635817" type="application/octet-stream" />
+            <sparkle:releaseNotesLink>https://github.com/yyaadet/autosrt_page/releases/tag/v10.4.0</sparkle:releaseNotesLink>
         </item>
     </channel>
 </rss>

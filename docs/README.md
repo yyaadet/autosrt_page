@@ -56,6 +56,9 @@ sudo xattr -rd com.apple.quarantine /Applications/AutoSRT.app
 
 Done!
 
+You can also see [https://github.com/yyaadet/autosrt_page/issues/14#issuecomment-3164502050]
+
+
 ### LLM benchmark for translation
 
 - Best: mistral-small3.1:24B

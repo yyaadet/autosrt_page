@@ -27,15 +27,24 @@ AutoSRT is a powerful desktop application that automatically generates dual lang
 
 MacOS M1 or later is required.
 
-1. Install Ollama [https://ollama.com/](https://ollama.com/).
-2. Download [AutoSRT](https://github.com/yyaadet/autosrt_page/releases).
 
-Solve macOS App Opening Issue in One Minute!
-Fix the error: "Apple cannot verify that 'App Cleaner & Uninstaller' does not contain malware that may harm your Mac or compromise your privacy."
+### Install ollama
+
+1. Drag Ollama.app to /Applications. [Ollama](https://ollama.com/).
+2. Run Ollama
+
+
+### Install App
+
+1. Drag AutoSRT-v-xxx.app to /Applications
+2. Run AutoSRT
+
+Solve macOS App Opening Issue in One Minute! Fix the error: "Apple cannot verify that 'App Cleaner & Uninstaller' does not contain malware that may harm your Mac or compromise your privacy."
 
 1. Open Terminal (press Command+Space and search for Terminal)
 2. Enter these two commands:
-```
+
+```shell
 sudo spctl --master-disable
 
 #(navigate to the applications folder)
@@ -46,15 +55,30 @@ sudo xattr -rd com.apple.quarantine /Applications/AutoSRT.app
 ```
 3. Enter your user password
 
----
-
-### How to do if failed to download audio model?
-
-1. Download model from [ggml-large-v3-turbo](https://github.com/yyaadet/autosrt_page/releases/download/v10.0.0/ggml-large-v3-turbo.bin.zip)
-2. Unzip the model and place the bin file to the directory `/Users/{your username}/Library/Application Support/AutoSRT/Models/ggml-large-v3-turbo/`
-3. Restart AutoSRT
-
 Done!
+
+### Install models
+
+If the app downloads models failed or the models are not in the App resources folder, we can download them and install them manually.
+
+You can try download SentenceBERT model manually from [SentenceBERT.mlmodelc.zip](https://github.com/yyaadet/llmsurf/releases/download/v1.0.0/SentenceBERT.mlmodelc.zip).
+
+1. Unzip it. You can see a file named `SentenceBERT.mlmodelc`.
+2. Open the Terminal app. If your downloads are in the folder `~/Downloads`, you should run the command: `cd ~/Downloads`
+3. Run command in the terminal: `mkdir -p ~/Library/Application\ Support/AutoSRT/Models/SentenceBERT`
+4. Run command in the terminal: `cp -rf SentenceBERT.mlmodelc ~/Library/Application\ Support/AutoSRT/Models/SentenceBERT`
+
+
+Download whisper model from [ggml-large-v3-turbo.bin.zip](https://github.com/yyaadet/autosrt_page/releases/download/v10.0.0/ggml-large-v3-turbo.bin.zip) .
+
+1. Unzip it. You can see a file named `ggml-large-v3-turbo.bin`.
+2. Open the Terminal app. If your downloads are in the folder `~/Downloads`, you should run the command: `cd ~/Downloads`
+3. Run command in the terminal: `mkdir -p ~/Library/Application\ Support/AutoSRT/Models/ggml-large-v3-turbo`
+4. Run command in the terminal: `cp -rf ggml-large-v3-turbo.bin ~/Library/Application\ Support/LLMSurf/Models/ggml-large-v3-turbo`
+
+
+Of course, you can operate in GUI.
+
 
 ### LLM benchmark for translation
 

@@ -79,6 +79,8 @@ Download whisper model from [ggml-large-v3-turbo.bin.zip](https://github.com/yya
 
 Of course, you can operate in GUI.
 
+You can also see [https://github.com/yyaadet/autosrt_page/issues/14#issuecomment-3164502050]
+
 
 ### LLM benchmark for translation
 

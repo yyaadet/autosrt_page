@@ -76,10 +76,16 @@ Download whisper model from [ggml-large-v3-turbo.bin.zip](https://github.com/yya
 3. Run command in the terminal: `mkdir -p ~/Library/Application\ Support/AutoSRT/Models/ggml-large-v3-turbo`
 4. Run command in the terminal: `cp -rf ggml-large-v3-turbo.bin ~/Library/Application\ Support/LLMSurf/Models/ggml-large-v3-turbo`
 
-
 Of course, you can operate in GUI.
 
 You can also see [https://github.com/yyaadet/autosrt_page/issues/14#issuecomment-3164502050]
+
+----
+
+Or download models from Baidu Disk:
+
+链接: https://pan.baidu.com/s/1L2rWKGX0eDA_WeG_Mu19eA?pwd=t6jv 提取码: t6jv
+
 
 
 ### LLM benchmark for translation

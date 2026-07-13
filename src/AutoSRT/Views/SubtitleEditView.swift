@@ -321,6 +321,15 @@ struct SubtitleEditView: View {
                 .onAppear {
                     scrollProxy = proxy
                 }
+                .onChange(of: viewModel.currentSubtitleIndex) { newIndex in
+                    guard newIndex >= 0 else { return }
+                    if let matchIndex = filteredSubtitles.firstIndex(where: { $0.index == newIndex }) {
+                        let targetId = filteredSubtitles[matchIndex].id
+                        withAnimation {
+                            proxy.scrollTo(targetId, anchor: .center)
+                        }
+                    }
+                }
             }
         }
         .frame(maxHeight: .infinity)
@@ -334,6 +343,46 @@ struct SubtitleEditView: View {
                 onDismiss()
             }
             .disabled(viewModel.isProcessing)
+
+            // Auto re-translate toggle
+            if !viewModel.subtitles.isEmpty && viewModel.targetLanguage != .None {
+                HStack(spacing: 4) {
+                    Toggle(isOn: $viewModel.autoReTranslate) {
+                        EmptyView()
+                    }
+                    .toggleStyle(.switch)
+                    .disabled(viewModel.isProcessing)
+                    .help("When enabled, edited source subtitles are automatically re-translated on focus loss")
+                    Text("Auto Re-translate")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+            }
+
+            // Translate / Re-translate buttons (only when source subtitles exist)
+            if !viewModel.subtitles.isEmpty && viewModel.targetLanguage != .None {
+                if viewModel.hasUntranslatedSubtitles {
+                    Button(action: {
+                        viewModel.translateCurrentSubtitles()
+                    }) {
+                        Label("Translate", systemImage: "globe")
+                    }
+                    .disabled(viewModel.isProcessing)
+                    .help("Translate all source subtitles")
+                }
+
+                if viewModel.hasNeedsRetranslation {
+                    Button(action: {
+                        viewModel.reTranslateEditedSubtitles()
+                    }) {
+                        Label(
+                            "Re-translate (\(viewModel.subtitles.filter { $0.needsRetranslation }.count))",
+                            systemImage: "arrow.triangle.2.circlepath")
+                    }
+                    .disabled(viewModel.isProcessing)
+                    .help("Re-translate subtitles whose source text was edited")
+                }
+            }
 
             Spacer()
 
@@ -593,6 +642,11 @@ struct SubtitleItemView: View {
                         .font(.caption2)
                         .foregroundColor(.orange)
                 }
+                if subtitle.needsRetranslation {
+                    Image(systemName: "arrow.triangle.2.circlepath")
+                        .font(.caption2)
+                        .foregroundColor(.blue)
+                }
             }
 
             // Original source reference
@@ -629,6 +683,10 @@ struct SubtitleItemView: View {
                     editCount =
                         editedSubtitles.filter { $0.isSourceEdited || $0.isTranslatedEdited }.count
                     viewModel.persistState()
+                    // Auto re-translate if enabled and this subtitle needs it
+                    if viewModel.autoReTranslate && subtitle.needsRetranslation {
+                        viewModel.reTranslateEditedSubtitles()
+                    }
                 }
             }
             .textFieldStyle(.plain)

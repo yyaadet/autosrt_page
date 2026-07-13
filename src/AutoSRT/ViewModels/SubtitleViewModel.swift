@@ -24,6 +24,8 @@ class SubtitleViewModel: ObservableObject {
     private static let selectedFontSizeKey = "SelectedFontSize"
     private static let selectedQualityKey = "SelectedQuality"
     private static let playerTimeKey = "PlayerTime"
+    private static let autoReTranslateKey = "AutoReTranslate"
+    private static let autoTranslateAfterAsrKey = "AutoTranslateAfterAsr"
     private let userDefaults = UserDefaults.standard
 
     // Use Application Support directory for storing subtitle files
@@ -115,11 +117,41 @@ class SubtitleViewModel: ObservableObject {
     @Published var selectedModel: String = Settings.shared.llmService.chatModel
     @Published var playerTime: Double = 0
     @Published var currentSubtitleIndex = -1
+    @Published var autoReTranslate = false {
+        didSet {
+            userDefaults.set(autoReTranslate, forKey: Self.autoReTranslateKey)
+        }
+    }
+    /// When true, "Generate Subtitles" does ASR + translate in one go (old behavior).
+    /// When false, ASR only — user clicks "Translate" separately (new behavior).
+    @Published var autoTranslateAfterAsr = false {
+        didSet {
+            userDefaults.set(autoTranslateAfterAsr, forKey: Self.autoTranslateAfterAsrKey)
+        }
+    }
     private var timeObserverToken: Any?
     private var generationTask: Task<Void, Never>?
 
     init() {
         restoreState()
+    }
+
+    /// True when source subtitles exist, user is not busy, and target language is set.
+    /// UI can show / enable the "Translate" button based on this.
+    var canTranslate: Bool {
+        !subtitles.isEmpty && !isProcessing && targetLanguage != .None
+    }
+
+    /// True when at least one subtitle needs re-translation (source was edited post-translation).
+    /// Checks both editingSubtitles (in-editor edits) and subtitles (saved edits).
+    var hasNeedsRetranslation: Bool {
+        editingSubtitles.contains { $0.needsRetranslation }
+            || subtitles.contains { $0.needsRetranslation }
+    }
+
+    /// True when source subtitles exist and at least one lacks a translation.
+    var hasUntranslatedSubtitles: Bool {
+        !subtitles.isEmpty && subtitles.contains { !$0.isTranslated }
     }
 
     /// Stop the currently running subtitle generation (transcription + translation).
@@ -192,6 +224,9 @@ class SubtitleViewModel: ObservableObject {
             self.playerTime = time
             self.player?.seek(to: CMTime(seconds: time, preferredTimescale: 1))
         }
+
+        autoReTranslate = userDefaults.bool(forKey: Self.autoReTranslateKey)
+        autoTranslateAfterAsr = userDefaults.bool(forKey: Self.autoTranslateAfterAsrKey)
 
         if editingSubtitles.isEmpty {
             editingSubtitles = subtitles
@@ -326,6 +361,8 @@ class SubtitleViewModel: ObservableObject {
         }
     }
 
+    /// ASR-only: generate source subtitles. No translation is performed.
+    /// User can edit source text first, then call `translateCurrentSubtitles()`.
     func generateSubtitles(_ url: URL) {
         logger.log("Starting video processing: \(url.lastPathComponent)")
         let startTime = Date()
@@ -350,7 +387,6 @@ class SubtitleViewModel: ObservableObject {
                 self.statusMessage = "Processing video..."
                 self.selectedModel = self.settings.llmService.chatModel
 
-                // Check cancellation before starting
                 try Task.checkCancellation()
 
                 // Extract audio from video
@@ -358,15 +394,12 @@ class SubtitleViewModel: ObservableObject {
                 let tempWavURL = url.deletingLastPathComponent().appendingPathComponent("audio.wav")
                 try await self.whisperService.extractAudio(from: url, to: tempWavURL)
 
-                // Check cancellation before transcription
                 try Task.checkCancellation()
 
-                // Transcribe audio
                 self.statusMessage = "Transcribing audio..."
                 self.progress = 0.5
-                self.subtitles = try await self.whisperService.transcribe(
-                    audioFile: tempWavURL, sourceLanguage: self.sourceLanguage,
-                    targetLanguage: self.targetLanguage
+                self.subtitles = try await self.whisperService.transcribeOnly(
+                    audioFile: tempWavURL, sourceLanguage: self.sourceLanguage
                 ) { [weak self] output, sub_progress in
                     Task { @MainActor in
                         guard let self = self else { return }
@@ -375,31 +408,36 @@ class SubtitleViewModel: ObservableObject {
                     }
                 }
 
-                // Check cancellation after transcription
                 try Task.checkCancellation()
 
                 self.editingSubtitles = self.subtitles
                 self.updateSubtitleStatistics()
                 self.persistState()
 
-                // Save subtitles to srt file
                 try? self.saveSubtitles(videoURL: url, format: .srt)
 
-                // remove exist video output file
                 let outputVideoURL = self.getVideoOutputURL(videoURL: url)
                 try? FileManager.default.removeItem(at: outputVideoURL)
 
-                // Clean up temporary audio file
                 try? FileManager.default.removeItem(at: tempWavURL)
 
-                // Update completion status
                 let timeSpent = Date().timeIntervalSince(startTime)
                 let timeString = String(format: "%.1f seconds", timeSpent)
 
-                self.statusMessage = "Generate subtitles done (Time spent: \(timeString))"
+                // Auto-translate after ASR if enabled
+                if self.autoTranslateAfterAsr && self.targetLanguage != .None {
+                    self.statusMessage = "Transcription done, starting translation..."
+                    self.isProcessing = false
+                    // Dispatch after a tick so the current Task unwinds before translate starts
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                        self?.translateCurrentSubtitles()
+                    }
+                    return
+                }
+
+                self.statusMessage = "Source subtitles generated (Time spent: \(timeString))"
                 self.isProcessing = false
 
-                // Track successful completion
                 self.analytics.trackEvent(
                     .generateSubtitleCompleted,
                     parameters: [
@@ -409,11 +447,10 @@ class SubtitleViewModel: ObservableObject {
                         "subtitle_count": self.subtitles.count,
                     ])
 
-                // Show completion notification
                 let notification = NSUserNotification()
-                notification.title = "Subtitle Generated."
+                notification.title = "Source Subtitles Generated."
                 notification.subtitle = "Time spent: \(timeString)"
-                notification.informativeText = "Edit it or render Video."
+                notification.informativeText = "Edit source text, then tap Translate."
                 notification.soundName = NSUserNotificationDefaultSoundName
                 self.notificationCenter.deliver(notification)
             } catch is CancellationError {
@@ -473,6 +510,174 @@ class SubtitleViewModel: ObservableObject {
                 }
                 logger.log("Unexpected error: \(error.localizedDescription)", level: .error)
                 self.analytics.trackError(error, context: "unexpected_error")
+            }
+        }
+    }
+
+    /// Translate existing source subtitles into the target language.
+    /// Call this after `generateSubtitles()` + user edits.
+    func translateCurrentSubtitles() {
+        guard !subtitles.isEmpty else { return }
+        guard targetLanguage != .None else {
+            statusMessage = "No target language selected — translation skipped."
+            return
+        }
+
+        logger.log("Starting translation of \(subtitles.count) subtitles")
+        let startTime = Date()
+
+        generationTask?.cancel()
+        generationTask = Task { [weak self] in
+            guard let self = self else { return }
+
+            do {
+                self.isProcessing = true
+                self.errorMessage = nil
+                self.progress = 0
+                self.statusMessage = "Translating subtitles..."
+
+                let translated = try await self.translationService.translateSubtitles(
+                    self.subtitles,
+                    fromLanguage: self.sourceLanguage.target,
+                    toLanguage: self.targetLanguage.target,
+                    model: self.settings.llmService.chatModel,
+                    progressCallback: { [weak self] progress, message in
+                        Task { @MainActor in
+                            self?.progress = progress
+                            self?.statusMessage = message
+                        }
+                    }
+                )
+
+                for i in self.subtitles.indices {
+                    if i < translated.count {
+                        self.subtitles[i].translatedText = translated[i].translatedText
+                        self.subtitles[i].needsRetranslation = false
+                    }
+                }
+                self.editingSubtitles = self.subtitles
+                self.updateSubtitleStatistics()
+                self.persistState()
+                if let videoURL = self.selectedVideoURL {
+                    try? self.saveSubtitles(videoURL: videoURL, format: .srt)
+                }
+
+                let timeSpent = Date().timeIntervalSince(startTime)
+                let timeString = String(format: "%.1f seconds", timeSpent)
+                self.statusMessage = "Translation done (Time spent: \(timeString))"
+                self.isProcessing = false
+
+                self.analytics.trackEvent(
+                    .generateSubtitleCompleted,
+                    parameters: [
+                        "translation_time": timeSpent,
+                        "subtitle_count": self.subtitles.count,
+                    ])
+
+                let notification = NSUserNotification()
+                notification.title = "Translation Complete."
+                notification.subtitle = "Time spent: \(timeString)"
+                notification.informativeText = "Bilingual subtitles ready."
+                notification.soundName = NSUserNotificationDefaultSoundName
+                self.notificationCenter.deliver(notification)
+            } catch is CancellationError {
+                await MainActor.run {
+                    self.isProcessing = false
+                    self.statusMessage = "Translation cancelled"
+                }
+            } catch {
+                await MainActor.run {
+                    self.errorMessage = error.localizedDescription
+                    self.statusMessage = "Translation failed: \(error.localizedDescription)"
+                    self.isProcessing = false
+                }
+                self.logger.log("Translation error: \(error.localizedDescription)", level: .error)
+                self.analytics.trackError(error, context: "translation_error")
+            }
+        }
+    }
+
+    /// Re-translate only subtitles whose source was edited after the initial translation.
+    func reTranslateEditedSubtitles() {
+        // Check editingSubtitles — that's where user edits happen during editing
+        let needRetranslation = editingSubtitles.filter { $0.needsRetranslation }
+        guard !needRetranslation.isEmpty else {
+            statusMessage = "No subtitles need re-translation."
+            return
+        }
+        guard targetLanguage != .None else {
+            statusMessage = "No target language selected."
+            return
+        }
+
+        logger.log("Re-translating \(needRetranslation.count) edited subtitles")
+        let startTime = Date()
+
+        generationTask?.cancel()
+        generationTask = Task { [weak self] in
+            guard let self = self else { return }
+
+            do {
+                self.isProcessing = true
+                self.errorMessage = nil
+                self.progress = 0
+                self.statusMessage = "Re-translating \(needRetranslation.count) edited subtitles..."
+
+                let translated = try await self.translationService.translateSubtitles(
+                    needRetranslation,
+                    fromLanguage: self.sourceLanguage.target,
+                    toLanguage: self.targetLanguage.target,
+                    model: self.settings.llmService.chatModel,
+                    progressCallback: { [weak self] progress, message in
+                        Task { @MainActor in
+                            self?.progress = progress
+                            self?.statusMessage = message
+                        }
+                    }
+                )
+
+                for i in needRetranslation.indices {
+                    guard i < translated.count else { break }
+                    let originalId = needRetranslation[i].id
+                    if let idx = self.editingSubtitles.firstIndex(where: { $0.id == originalId }) {
+                        self.editingSubtitles[idx].translatedText = translated[i].translatedText
+                        self.editingSubtitles[idx].needsRetranslation = false
+                    }
+                    if let idx = self.subtitles.firstIndex(where: { $0.id == originalId }) {
+                        self.subtitles[idx].translatedText = translated[i].translatedText
+                        self.subtitles[idx].needsRetranslation = false
+                    }
+                }
+                self.updateSubtitleStatistics()
+                self.persistState()
+                if let videoURL = self.selectedVideoURL {
+                    try? self.saveSubtitles(videoURL: videoURL, format: .srt)
+                }
+
+                let timeSpent = Date().timeIntervalSince(startTime)
+                let timeString = String(format: "%.1f seconds", timeSpent)
+                self.statusMessage = "Re-translation done (Time spent: \(timeString))"
+                self.isProcessing = false
+
+                let notification = NSUserNotification()
+                notification.title = "Re-translation Complete."
+                notification.subtitle = "\(needRetranslation.count) subtitles updated."
+                notification.informativeText = "Time spent: \(timeString)"
+                notification.soundName = NSUserNotificationDefaultSoundName
+                self.notificationCenter.deliver(notification)
+            } catch is CancellationError {
+                await MainActor.run {
+                    self.isProcessing = false
+                    self.statusMessage = "Re-translation cancelled"
+                }
+            } catch {
+                await MainActor.run {
+                    self.errorMessage = error.localizedDescription
+                    self.statusMessage = "Re-translation failed: \(error.localizedDescription)"
+                    self.isProcessing = false
+                }
+                self.logger.log("Re-translation error: \(error.localizedDescription)", level: .error)
+                self.analytics.trackError(error, context: "retranslation_error")
             }
         }
     }
@@ -795,6 +1000,9 @@ class SubtitleViewModel: ObservableObject {
     }
 
     func showSubtitleEditor() {
+        // Sync editingSubtitles from subtitles so the editor always shows the latest data.
+        // Prevents stale persisted data from showing an incomplete list.
+        editingSubtitles = subtitles
         showingSubtitleEditor = true
     }
 

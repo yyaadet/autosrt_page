@@ -407,6 +407,43 @@ class WhisperService {
         return hours * 3600 + minutes * 60 + seconds + milliseconds / 1000
     }
 
+    /// ASR-only: transcribe audio to source-language subtitles. No translation is performed.
+    public func transcribeOnly(
+        audioFile: URL,
+        sourceLanguage: Language,
+        progressCallback: @escaping (String, Double) -> Void
+    ) async throws -> [Subtitle] {
+        logger.log("Starting transcription (ASR only)...")
+
+        guard sourceLanguage != .None else {
+            throw WhisperServiceError.invalidLanguage(
+                "Source language must be specified. Automatic language detection is not available.")
+        }
+
+        progressCallback(
+            "Generating subtitles in source language (\(sourceLanguage.displayName))...", 0.3)
+        let sourceSubtitles = try await transcribeAudio(
+            audioFile: audioFile, language: sourceLanguage
+        ) { message, sub_progress in
+            progressCallback(message, 0.1 + 0.8 * sub_progress)
+        }
+
+        let result = sourceSubtitles.enumerated().map { (i, sub) in
+            Subtitle(
+                startTime: sub.startTime,
+                endTime: sub.endTime,
+                sourceText: sub.sourceText.trimmingCharacters(in: .whitespacesAndNewlines),
+                translatedText: "",
+                index: i
+            )
+        }
+
+        progressCallback("Transcription complete: \(result.count) subtitles.", 1.0)
+        return result
+    }
+
+    /// Full pipeline: ASR + optional translation.
+    /// When `targetLanguage == .None` translation is skipped (source-only).
     public func transcribe(
         audioFile: URL,
         sourceLanguage: Language,
@@ -421,12 +458,28 @@ class WhisperService {
         }
         let realSourceLanguage = sourceLanguage
 
+        // Step 1: ASR
         progressCallback(
             "Generating subtitles in source language (\(realSourceLanguage.displayName))...", 0.3)
         let sourceSubtitles = try await transcribeAudio(
             audioFile: audioFile, language: realSourceLanguage
         ) { message, sub_progress in
             progressCallback(message, 0.1 + 0.5 * sub_progress)
+        }
+
+        // Step 2: translate only when a target language is selected
+        guard targetLanguage != .None else {
+            let result = sourceSubtitles.enumerated().map { (i, sub) in
+                Subtitle(
+                    startTime: sub.startTime,
+                    endTime: sub.endTime,
+                    sourceText: sub.sourceText.trimmingCharacters(in: .whitespacesAndNewlines),
+                    translatedText: "",
+                    index: i
+                )
+            }
+            progressCallback("Transcription complete (source only): \(result.count) subtitles.", 1.0)
+            return result
         }
 
         progressCallback(
@@ -459,7 +512,6 @@ class WhisperService {
             )
         }
 
-        // If translation failed or wasn't needed, return original bilingual subtitles
         return zip(sourceSubtitles, translatedSubtitles).enumerated().map {
             (index, tuple) -> Subtitle in
             let (en, src) = tuple

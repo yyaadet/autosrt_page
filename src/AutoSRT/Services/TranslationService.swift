@@ -21,28 +21,13 @@ public class TranslationService: ObservableObject {
             You are a professional video subtitle translator specializing in \(fromLanguage) to \(toLanguage) translation.
               1. Translate the following subtitles into natural, fluent \(toLanguage). Each translation should be concise, accurate, and contextually appropriate.
               2. Preserve the original meaning and subtitle structure as much as possible.
-              3. Output a valid JSON dict.
+              3. Output ONLY a valid JSON object, no other text, no markdown.
 
             Response format:
-            ```json
-            {
-                data: {
-                    "":"",
-                    ...
-                }
-            }
-            ```
+            {"data": {"source text": "translated text", ...}}
 
-            Response examples:
-            ```json
-            {
-                data: {
-                    "Hello ": "您好 ",
-                    "let's start. ": "让我们开始吧。"
-                }
-            }
-            ```
-
+            Example:
+            {"data": {"Hello ": "您好 ", "let's start. ": "让我们开始吧。"}}
             """
         let systemMessage = ChatMessage(role: .system, content: systemPrompt)
 
@@ -66,27 +51,29 @@ public class TranslationService: ObservableObject {
             messages: messages, model: model, tools: nil, formatter: nil)
 
         // extract json, convert to array
-        guard let jsonDict = await LLMServiceFactory.extractJSONs(from: assistMessage.content).first
-        else {
-            progressCallback(
-                1.0,
-                "Failed to parse JSON response"
-            )
+        let jsonResults = await LLMServiceFactory.extractJSONs(from: assistMessage.content)
+        guard let firstJson = jsonResults.first else {
+            let snippet = String(assistMessage.content.prefix(200))
             logger.log(
-                "Failed to parse JSON response from: \(assistMessage.content)", level: .warning)
-            return [:]
-        }
-        guard let items = jsonDict["data"] as? [String: String] else {
-            progressCallback(
-                1.0,
-                "Failed to get data"
-            )
+                "Failed to parse any JSON from response. Snippet: \(snippet)", level: .warning)
+            progressCallback(1.0, "JSON parse failed — retrying individually...")
             throw NSError(
-                domain: "Invalid JSON format", code: 0,
-                userInfo: [
-                    NSLocalizedDescriptionKey:
-                        "Failed to extract array from the JSON response of the assistant."
-                ])
+                domain: "TranslationError", code: 0,
+                userInfo: [NSLocalizedDescriptionKey: "Failed to parse JSON from LLM response."])
+        }
+
+        // Support both {"data": {...}} and flat {...} response formats
+        let items: [String: String]
+        if let dataDict = firstJson["data"] as? [String: String] {
+            items = dataDict
+        } else if let flat = firstJson as? [String: String] {
+            items = flat
+        } else {
+            logger.log("JSON response has unexpected shape: \(firstJson)", level: .warning)
+            progressCallback(1.0, "Unexpected JSON shape — retrying individually...")
+            throw NSError(
+                domain: "TranslationError", code: 0,
+                userInfo: [NSLocalizedDescriptionKey: "Unexpected JSON response structure."])
         }
         // convert items to dict
         var translatedTexts: [String: String] = [:]
@@ -118,14 +105,10 @@ public class TranslationService: ObservableObject {
               1. Translate the following subtitle into natural, fluent \(toLanguage). Each translation should be concise, accurate, and contextually appropriate.
               2. The subtitle is in the context.
               3. Preserve the original meaning and subtitle structure as much as possible.
-              4. Output a valid JSON dict.
+              4. Output ONLY a valid JSON object, no other text, no markdown.
 
             Response format:
-            ```json
-            {
-                translation: ""
-            }
-            ```
+            {"translation": "translated text"}
             """
         let systemMessage = ChatMessage(role: .system, content: systemPrompt)
 
@@ -166,106 +149,129 @@ public class TranslationService: ObservableObject {
         return translation
     }
 
-    /// Translate subtitles using Ollama
+    /// Translate subtitles using LLM.
+    /// Batches are processed concurrently (up to 3 in parallel) for speed.
+    /// Failed items are retried as a smaller batch instead of one-by-one.
     public func translateSubtitles(
         _ subtitles: [Subtitle], fromLanguage: String, toLanguage: String,
         model: String,
         progressCallback: @escaping (Double, String) -> Void
     ) async throws -> [Subtitle] {
-        var translatedSubtitles: [Subtitle] = []
         let total = subtitles.count
         var translatedTexts: [String: String] = [:]
+        let start = Date().timeIntervalSince1970
 
-        // Process subtitles in batches
-        let batchSize = Settings.shared.llmService.maxChatHistoryCount
+        let batchSize = Settings.shared.llmService.translationBatchSize
         let batches = stride(from: 0, to: subtitles.count, by: batchSize).map {
             Array(subtitles[$0..<min($0 + batchSize, subtitles.count)])
         }
+        let totalBatches = batches.count
+        var completedCount = 0
 
-        var processedCount = 0
-        var successCount = 0
-        var exceptionCount: Int = 0
-        let start = Date().timeIntervalSince1970
+        func reportProgress(_ message: String) {
+            let elapsed = Date().timeIntervalSince1970 - start
+            let speed = elapsed > 0 ? Double(completedCount) / elapsed : 0
+            let left = speed > 0 ? Int(Double(total - completedCount) / speed) : 0
+            progressCallback(
+                Double(completedCount) / Double(total),
+                "\(message) | \(completedCount)/\(total) subs, \(String(format: "%.1f", speed))/s, ETA \(left)s"
+            )
+        }
 
-        for (batchIndex, batch) in batches.enumerated() {
-            do {
-                let translatedBatch = try await doTranslate(
-                    batch: batch,
-                    fromLanguage: fromLanguage,
-                    toLanguage: toLanguage,
-                    model: model,
-                    progressCallback: { progress, message in
-                        // Scale the progress to represent progress within the current batch
-                        let overallProgress =
-                            (Double(processedCount) + progress * Double(batch.count))
-                            / Double(total)
-                        let successRatio = Double(successCount) * 100.0 / Double(total)
-                        let successRatioString = String(format: "%.2f", successRatio)
-                        let spendTime = Date().timeIntervalSince1970 - start
-                        let speed = Double(processedCount) / spendTime
-                        let speedString = String(format: "%.2f", speed)
-                        let leftTime = speed > 0 ? Int(Double(total - processedCount) / speed) : 0
-                        progressCallback(
-                            overallProgress.clamped(to: 0.0...1.0),
-                            "Batch \(batchIndex + 1)/\(batches.count), left time \(leftTime)s, \(speedString) subtitles/s, success \(successRatioString)% \(successCount)/\(total), exception \(exceptionCount): \(message)"
+        // Phase 1: translate all batches concurrently (up to 3 at a time)
+        try await withThrowingTaskGroup(of: (Int, [String: String]).self) { group in
+            for (index, batch) in batches.enumerated() {
+                group.addTask { [logger] in
+                    do {
+                        let result = try await self.doTranslate(
+                            batch: batch,
+                            fromLanguage: fromLanguage,
+                            toLanguage: toLanguage,
+                            model: model,
+                            progressCallback: { _, _ in }
                         )
+                        return (index, result)
+                    } catch {
+                        logger.log("Batch \(index + 1)/\(totalBatches) failed: \(error.localizedDescription)", level: .warning)
+                        return (index, [:])
                     }
-                )
-
-                // update translatedTexts
-                translatedTexts.merge(translatedBatch) { (current, _) in current }
-            } catch {
-                exceptionCount += 1
-                logger.log(
-                    "Failed to translate batch \(batchIndex + 1)/\(batches.count): \(error.localizedDescription)",
-                    level: .error)
+                }
             }
 
-            // Map the translated texts back to subtitles with original metadata
-            for (i, subtitle) in batch.enumerated() {
-                // Is translation exists?
-                var translation =
-                    translatedTexts[
-                        subtitle.sourceText.trimmingCharacters(in: .whitespacesAndNewlines)]
-                    ?? ""
-                if translation.isEmpty {
-                    logger.log(
-                        "\(i)th subtitle translation not found: '\(subtitle.sourceText)'",
-                        level: .info
-                    )
-                    // translate again
-                    do {
-                        translation = try await doTranslateOne(
-                            subtitle: subtitle, batch: batch,
-                            fromLanguage: fromLanguage, toLanguage: toLanguage, model: model)
-                        if !translation.isEmpty {
-                            successCount += 1
-                            translatedTexts[
-                                subtitle.sourceText.trimmingCharacters(in: .whitespacesAndNewlines)]
-                            = translation
-                        }
-                    } catch {
-                        logger.log("Failed to translate '\(subtitle.sourceText)' again: \(error.localizedDescription)", level: .warning)
-                    }
-                } else {
-                    successCount += 1
-                }
-                
-                processedCount += 1
-
-                let newSubtitle = Subtitle(
-                    startTime: subtitle.startTime,
-                    endTime: subtitle.endTime,
-                    sourceText: subtitle.sourceText,
-                    translatedText: translation.isEmpty ? subtitle.sourceText : translation,
-                    index: subtitle.index
-                )
-                translatedSubtitles.append(newSubtitle)
+            for try await (batchIndex, result) in group {
+                translatedTexts.merge(result) { (current, _) in current }
+                let batchSize = batches[batchIndex].count
+                completedCount += batchSize
+                reportProgress("Batch \(batchIndex + 1)/\(totalBatches) done")
             }
         }
 
-        progressCallback(1.0, "Translation completed")
-        return translatedSubtitles
+        // Phase 2: collect any subtitles still missing translations
+        var missing: [Subtitle] = []
+        var found: [Subtitle] = []
+        for sub in subtitles {
+            let key = sub.sourceText.trimmingCharacters(in: .whitespacesAndNewlines)
+            if let t = translatedTexts[key], !t.isEmpty {
+                found.append(sub)
+            } else {
+                missing.append(sub)
+            }
+        }
+
+        // Phase 3: retry missing items as a single batch (not one-by-one)
+        if !missing.isEmpty {
+            logger.log("Retrying \(missing.count) untranslated subtitles as a batch", level: .info)
+            reportProgress("Retrying \(missing.count) missing...")
+            do {
+                let retryResult = try await self.doTranslate(
+                    batch: missing,
+                    fromLanguage: fromLanguage,
+                    toLanguage: toLanguage,
+                    model: model,
+                    progressCallback: { _, _ in }
+                )
+                translatedTexts.merge(retryResult) { (current, _) in current }
+
+                // Check which ones resolved
+                var stillMissing: [Subtitle] = []
+                for sub in missing {
+                    let key = sub.sourceText.trimmingCharacters(in: .whitespacesAndNewlines)
+                    if let t = translatedTexts[key], !t.isEmpty {
+                        found.append(sub)
+                    } else {
+                        stillMissing.append(sub)
+                    }
+                }
+                missing = stillMissing
+            } catch {
+                logger.log("Retry batch also failed, will use source text as fallback", level: .warning)
+            }
+        }
+
+        // Phase 4: any truly remaining subtitles get their source text as fallback
+        for sub in missing {
+            let key = sub.sourceText.trimmingCharacters(in: .whitespacesAndNewlines)
+            translatedTexts[key] = sub.sourceText
+            found.append(sub)
+        }
+
+        // Build result preserving input order
+        var result: [Subtitle] = []
+        for sub in subtitles {
+            let key = sub.sourceText.trimmingCharacters(in: .whitespacesAndNewlines)
+            let translation = translatedTexts[key] ?? sub.sourceText
+            result.append(Subtitle(
+                startTime: sub.startTime,
+                endTime: sub.endTime,
+                sourceText: sub.sourceText,
+                translatedText: translation,
+                index: sub.index
+            ))
+            completedCount += 1  // only used for progress display below
+        }
+
+        progressCallback(1.0, "Translation completed: \(result.count) subtitles")
+        return result
     }
 
     /// Split text into multiple lines if characters exceed maxLength

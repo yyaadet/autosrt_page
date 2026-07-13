@@ -187,6 +187,35 @@ struct ContentView: View {
             }
             .disabled(viewModel.selectedVideoURL == nil || viewModel.isProcessing)
 
+            HStack(spacing: 4) {
+                Toggle(isOn: $viewModel.autoTranslateAfterAsr) {
+                    EmptyView()
+                }
+                .toggleStyle(.switch)
+                .disabled(viewModel.isProcessing)
+                .help("When on: Generate does ASR + Translate in one go. When off: ASR only, Translate separately.")
+                Text("Auto Translate")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .lineLimit(1)
+            }
+
+            // Translate button: appears after ASR is done
+            Button(action: {
+                viewModel.translateCurrentSubtitles()
+            }) {
+                Label(
+                    viewModel.hasNeedsRetranslation
+                        ? "Re-translate Edited"
+                        : "Translate",
+                    systemImage: "globe")
+            }
+            .disabled(!viewModel.canTranslate)
+            .help(
+                viewModel.targetLanguage == .None
+                    ? "Select a target language first" : "Translate source subtitles"
+            )
+
             if viewModel.isProcessing {
                 Button(action: {
                     viewModel.stopGeneration()

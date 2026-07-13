@@ -10,7 +10,11 @@ public struct Subtitle: Identifiable, Codable, Equatable {
         didSet {
             if sourceText != oldValue {
                 isSourceEdited = true
-                originalSourceText = oldValue 
+                originalSourceText = oldValue
+                // If translation already existed and source changed, mark for re-translation
+                if isTranslated {
+                    needsRetranslation = true
+                }
             }
         }
     }
@@ -25,9 +29,17 @@ public struct Subtitle: Identifiable, Codable, Equatable {
     public var index: Int
     public var isSourceEdited: Bool = false
     public var isTranslatedEdited: Bool = false
+    /// Tracks whether this subtitle's source text changed after translation was already done,
+    /// so the UI can offer to re-translate just this entry.
+    public var needsRetranslation: Bool = false
+    
+    /// True when a non-empty translatedText exists and differs from sourceText.
+    public var isTranslated: Bool {
+        !translatedText.isEmpty && translatedText != sourceText
+    }
     
     enum CodingKeys: String, CodingKey {
-        case id, startTime, endTime, originalSourceText, originalTranslatedText, sourceText, translatedText, index, isSourceEdited, isTranslatedEdited
+        case id, startTime, endTime, originalSourceText, originalTranslatedText, sourceText, translatedText, index, isSourceEdited, isTranslatedEdited, needsRetranslation
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -42,6 +54,7 @@ public struct Subtitle: Identifiable, Codable, Equatable {
         try container.encode(index, forKey: .index)
         try container.encode(isSourceEdited, forKey: .isSourceEdited)
         try container.encode(isTranslatedEdited, forKey: .isTranslatedEdited)
+        try container.encode(needsRetranslation, forKey: .needsRetranslation)
     }
     
     public init(from decoder: Decoder) throws {
@@ -56,6 +69,7 @@ public struct Subtitle: Identifiable, Codable, Equatable {
         index = try container.decode(Int.self, forKey: .index)
         isSourceEdited = try container.decode(Bool.self, forKey: .isSourceEdited)
         isTranslatedEdited = try container.decode(Bool.self, forKey: .isTranslatedEdited)
+        needsRetranslation = try container.decodeIfPresent(Bool.self, forKey: .needsRetranslation) ?? false
     }
     
     public init(id: UUID = UUID(), startTime: TimeInterval, endTime: TimeInterval, sourceText: String, translatedText: String, index: Int = 0, sourceLanguage: String? = nil, translatedLanguage: String? = nil) {
@@ -69,6 +83,7 @@ public struct Subtitle: Identifiable, Codable, Equatable {
         self.index = index
         self.isSourceEdited = false
         self.isTranslatedEdited = false
+        self.needsRetranslation = false
     }
     
     public var displayText: String {

@@ -759,6 +759,22 @@ struct LLMServiceSettingsView: View {
                 }
                 .help("Maximum number of messages to keep in chat history")
 
+                Slider(
+                    value: Binding(
+                        get: { Double(settings.llmService.translationBatchSize) },
+                        set: { settings.llmService.translationBatchSize = Int($0.rounded()) }
+                    ),
+                    in: 10...200,
+                    step: 10
+                ) {
+                    Text("Translation Batch Size: \(settings.llmService.translationBatchSize)")
+                } minimumValueLabel: {
+                    Text("10")
+                } maximumValueLabel: {
+                    Text("200")
+                }
+                .help("Number of subtitles per translation request. Larger = fewer API calls but more context.")
+
                 HStack {
                     Text("Timeout")
                     TextField("", value: $settings.llmService.timeout, format: .number)

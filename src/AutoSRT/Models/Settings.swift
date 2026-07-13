@@ -148,6 +148,8 @@ public class Settings: ObservableObject {
         public var temperature: Double = 0.4
         public var topP: Double = 0.85
         public var maxChatHistoryCount: Int = 30
+        /// Number of subtitles sent per translation request. Larger = fewer API calls.
+        public var translationBatchSize: Int = 60
         public var timeout: TimeInterval = 600  // request timeout in seconds
 
         // Provider configurations
@@ -395,6 +397,9 @@ public class Settings: ObservableObject {
                     if let maxChatHistoryCount = Int(section.values["maxChatHistoryCount"] ?? "") {
                         self.llmService.maxChatHistoryCount = maxChatHistoryCount
                     }
+                    if let translationBatchSize = Int(section.values["translationBatchSize"] ?? "") {
+                        self.llmService.translationBatchSize = translationBatchSize
+                    }
                     if let provider = section.values["provider"] {
                         self.llmService.selectedProviderId =
                             UUID(uuidString: provider) ?? LLMService.Provider.defaultOllama.id
@@ -488,6 +493,7 @@ extension Settings: IniSerializable {
         content += "temperature=\(llmService.temperature)\n"
         content += "topP=\(llmService.topP)\n"
         content += "maxChatHistoryCount=\(llmService.maxChatHistoryCount)\n"
+        content += "translationBatchSize=\(llmService.translationBatchSize)\n"
         content += "provider=\(llmService.selectedProviderId.uuidString)\n"
         content += "timeout=\(llmService.timeout)\n"
         content += "\n"

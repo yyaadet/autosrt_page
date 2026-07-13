@@ -59,48 +59,72 @@ public final class LLMServiceFactory: @unchecked Sendable {
         }
     }
 
+    /// Extract JSON objects from LLM response text.
+    /// Tries markdown code blocks first, then falls back to parsing the full response.
+    /// Also attempts to repair malformed JSON (e.g. unquoted keys, trailing commas).
     public static func extractJSONs(from text: String) -> [[String: Any]] {
-        // Convert the markdown string to a C string (UTF-8) for cmark
-        guard let cText = text.cString(using: .utf8) else {
-            LoggerService.shared.log("Failed to convert markdown string to C string: \(text)")
-            return []
-        }
+        var results: [[String: Any]] = []
 
-        // Parse the markdown string into an AST root node using cmark
-        guard let root = cmark_parse_document(cText, text.utf8.count, CMARK_OPT_DEFAULT) else {
-            LoggerService.shared.log("Failed to parse markdown into AST: \(text)")
-            return []
-        }
+        // Strategy 1: look for JSON inside ```code blocks``` using cmark
+        if let cText = text.cString(using: .utf8),
+           let root = cmark_parse_document(cText, text.utf8.count, CMARK_OPT_DEFAULT) {
+            defer { cmark_node_free(root) }
 
-        // Ensure the root node is freed when we're done
-        defer { cmark_node_free(root) }
+            let iter = cmark_iter_new(root)
+            var eventType = cmark_iter_next(iter)
 
-        let iter = cmark_iter_new(root)
-        var eventType = cmark_iter_next(iter)
-        var jsonBlocks: [[String: Any]] = []
-
-        while eventType != CMARK_EVENT_DONE {
-            if let node = cmark_iter_get_node(iter) {
-                let nodeType = cmark_node_get_type(node)
-                if nodeType == CMARK_NODE_CODE_BLOCK {
-                    if let literal = cmark_node_get_literal(node) {
-                        let literalString = String(cString: literal)
-
-                        if let json = try? JSONSerialization.jsonObject(
-                            with: Data(literalString.utf8),
-                            options: [.fragmentsAllowed, .json5Allowed]) as? [String: Any]
-                        {
-                            jsonBlocks.append(json)
-                        }
+            while eventType != CMARK_EVENT_DONE {
+                if let node = cmark_iter_get_node(iter),
+                   cmark_node_get_type(node) == CMARK_NODE_CODE_BLOCK,
+                   let literal = cmark_node_get_literal(node) {
+                    let literalString = String(cString: literal)
+                    if let json = tryParseJSON(literalString) {
+                        results.append(json)
                     }
                 }
+                eventType = cmark_iter_next(iter)
             }
-
-            eventType = cmark_iter_next(iter)
+            cmark_iter_free(iter)
         }
 
-        cmark_iter_free(iter)
+        if results.isEmpty {
+            if let json = tryParseJSON(text) {
+                results.append(json)
+            }
+        }
 
-        return jsonBlocks
+        return results
+    }
+
+    /// Attempt to parse a string as JSON with multiple fallback strategies.
+    private static func tryParseJSON(_ string: String) -> [String: Any]? {
+        // Attempt 1: standard JSON parsing
+        if let data = string.data(using: .utf8),
+           let json = try? JSONSerialization.jsonObject(with: data, options: [.fragmentsAllowed]) as? [String: Any] {
+            return json
+        }
+
+        // Attempt 2: JSON5 (unquoted keys, trailing commas, etc.) — may require macOS 14+
+        if let data = string.data(using: .utf8),
+           let json = try? JSONSerialization.jsonObject(with: data, options: [.fragmentsAllowed, .json5Allowed]) as? [String: Any] {
+            return json
+        }
+
+        // Attempt 3: try to extract a { ... } region from within the text
+        if let braceStart = string.firstIndex(of: "{"),
+           let braceEnd = string.lastIndex(of: "}"),
+           braceEnd > braceStart {
+            let substring = string[braceStart...braceEnd]
+            if let data = String(substring).data(using: .utf8),
+               let json = try? JSONSerialization.jsonObject(with: data, options: [.fragmentsAllowed]) as? [String: Any] {
+                return json
+            }
+            if let data = String(substring).data(using: .utf8),
+               let json = try? JSONSerialization.jsonObject(with: data, options: [.fragmentsAllowed, .json5Allowed]) as? [String: Any] {
+                return json
+            }
+        }
+
+        return nil
     }
 }
